@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "ZYmBivn+DcM4lit1UTmHrciSRHl09mCsnhuip854Q5d3yG8gSy3uxbAT9FRu4rK0gzeMoQojhB7+1blIpCmbrw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Lüku\\Documents\\Programming\\C-Sharp\\Mobile\\Hitchhiker-V1\\Hitchhiker-V1\\Hitchhiker-V1.iOS\\Hitchhiker-V1.iOS.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Lüku\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
+    "C:\\Users\\Lüku\\.nuget\\packages\\xamarin.essentials\\1.7.3\\xamarin.essentials.1.7.3.nupkg.sha512",
+    "C:\\Users\\Lüku\\.nuget\\packages\\xamarin.forms\\5.0.0.2515\\xamarin.forms.5.0.0.2515.nupkg.sha512",
+    "C:\\Users\\Lüku\\.nuget\\packages\\xamarin.forms.maps\\5.0.0.2515\\xamarin.forms.maps.5.0.0.2515.nupkg.sha512"
+  ],
+  "logs": []
+}

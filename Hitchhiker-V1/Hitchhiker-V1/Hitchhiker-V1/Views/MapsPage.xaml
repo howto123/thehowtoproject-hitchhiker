@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Hitchhiker_V1.Views.MapsPage"
+             xmlns:vm="clr-namespace:Hitchhiker_V1.ViewModels" xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             Title="{Binding Title}">
+    
+    <ContentPage.BindingContext>
+        <vm:MapsViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Accent">#96d1ff</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout Spacing="3">
+            <maps:Map />
+            <Label Text="{Binding Text}"/>
+        </StackLayout>
+    </ContentPage.Content>
+
+
+</ContentPage>
