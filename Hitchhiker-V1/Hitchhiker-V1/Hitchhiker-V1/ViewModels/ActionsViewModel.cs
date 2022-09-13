@@ -1,11 +1,11 @@
-﻿using Hitchhiker_V1.Models;
-using Hitchhiker_V1.Views;
+﻿using Hitchhiker_V1.Views;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Essentials;
+using Hitchhiker_V1.Services;
 
 namespace Hitchhiker_V1.ViewModels
 {
@@ -21,9 +21,11 @@ namespace Hitchhiker_V1.ViewModels
             IsBusy = true;
         }
 
-        public void ShowMeClickedViewModel()
+        public async Task<string> ShowMeClicked()
         {
-           Console.WriteLine("ActionsViewModel: ShowMeMoreClicked!");
+            LocationAccesser locationAccesser = await LocationAccesser.CreateAsync();
+            Location location = locationAccesser.GetLocation();
+            return $"Location is: {location.Latitude}, {location.Longitude}";
         }
     }
 }

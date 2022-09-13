@@ -1,5 +1,4 @@
-﻿using Hitchhiker_V1.Models;
-using Hitchhiker_V1.ViewModels;
+﻿using Hitchhiker_V1.ViewModels;
 using Hitchhiker_V1.Views;
 using System;
 using System.Diagnostics;
@@ -10,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin.Essentials;
+using Hitchhiker_V1.Services;
 
 namespace Hitchhiker_V1.Views
 {
@@ -29,12 +30,10 @@ namespace Hitchhiker_V1.Views
             base.OnAppearing();
             _viewModel.OnAppearing();
         }
-        public void ShowMeClicked(object sender, EventArgs args)
+        public async void ShowMeClicked(object sender, EventArgs args)
         {
-            DisplayAlert("Alert", "ShowMeClicked!", "Ok");
-            Debug.WriteLine("ActionsViewModel: ShowMeMoreClicked!");
-            DisplayAlert("Alert", "Written...", "Ok");
-            _viewModel.ShowMeClickedViewModel();
+            string message = await _viewModel.ShowMeClicked();
+            await DisplayAlert("Alert", message, "Ok");
         }
     }
 }
