@@ -35,5 +35,14 @@ namespace Hitchhiker_V1.Views
             string message = await _viewModel.ShowMeClicked();
             await DisplayAlert("Alert", message, "Ok");
         }
+        public void StoreToPreferences(object sender, EventArgs args)
+        {
+            DisplayAlert("Alert", $"{setKey.Text}, {setValue.Text}", "Ok");
+            _viewModel.SetPreference(setKey.Text, setValue.Text);
+        }
+        public void GetPreference(object sender, EventArgs args)
+        {
+            DisplayAlert("Alert", $"{_viewModel.GetPreference(getKey.Text)}", "Ok");
+        }
     }
 }

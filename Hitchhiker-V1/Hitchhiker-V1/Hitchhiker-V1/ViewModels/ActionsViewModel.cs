@@ -27,5 +27,18 @@ namespace Hitchhiker_V1.ViewModels
             Location location = locationAccesser.GetLocation();
             return $"Location is: {location.Latitude}, {location.Longitude}";
         }
+
+
+        public string SetPreference(string key, string value)
+        {
+            PreferencesHandler preferencesHandler = PreferencesHandler.GetInstance();
+            preferencesHandler.SetPreference(key, value);
+            return "Preference set successfully!";
+        }
+        public string GetPreference(string key)
+        {
+            PreferencesHandler preferencesHandler = PreferencesHandler.GetInstance();
+            return preferencesHandler.GetPreference(key);
+        }
     }
 }

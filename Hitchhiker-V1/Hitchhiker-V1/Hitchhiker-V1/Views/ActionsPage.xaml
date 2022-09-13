@@ -10,5 +10,10 @@
     <StackLayout>
         <Label Text="Choose how long you want to share your location ad destination:" />
         <Button Text="Show me as hitchhiker on map." Clicked="ShowMeClicked"/>
+        <Button Text="Store key-value pair into preferences." Clicked="StoreToPreferences"/>
+        <Entry x:Name="setKey" Text="" Placeholder="setKey" />
+        <Entry x:Name="setValue" Text="" Placeholder="setValue" />
+        <Button Text="Alert Specified Preference" Clicked="GetPreference"/>
+        <Entry x:Name="getKey" Text="" Placeholder="Give key, get value..." />
     </StackLayout>
 </ContentPage>
