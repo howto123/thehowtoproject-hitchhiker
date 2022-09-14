@@ -5,9 +5,11 @@
              xmlns:vm="clr-namespace:Hitchhiker_V1.ViewModels" xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              Title="{Binding Title}">
     
-    <ContentPage.BindingContext>
+    <!--ContentPage.BindingContext>
         <vm:MapsViewModel />
-    </ContentPage.BindingContext>
+    </ContentPage.BindingContext-->
+    
+    <WebView Source="https://maps.google.ch"></WebView>
 
     <ContentPage.Resources>
         <ResourceDictionary>

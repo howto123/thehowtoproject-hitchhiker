@@ -15,5 +15,8 @@
         <Entry x:Name="setValue" Text="" Placeholder="setValue" />
         <Button Text="Alert Specified Preference" Clicked="GetPreference"/>
         <Entry x:Name="getKey" Text="" Placeholder="Give key, get value..." />
+        <Button Text="GetRequest" Clicked="GetRequest"/>
+        <Button Text="PostRequest" Clicked="PostRequest"/>
+        <Entry x:Name="destination" Text="" Placeholder="Your destination?" />
     </StackLayout>
 </ContentPage>

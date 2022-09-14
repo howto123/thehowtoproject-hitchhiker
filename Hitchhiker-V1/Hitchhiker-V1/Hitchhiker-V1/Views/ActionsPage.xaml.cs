@@ -44,5 +44,16 @@ namespace Hitchhiker_V1.Views
         {
             DisplayAlert("Alert", $"{_viewModel.GetPreference(getKey.Text)}", "Ok");
         }
+
+        public async void GetRequest(object sender, EventArgs args)
+        {
+            string message = await _viewModel.GetHitchhikers();
+            await DisplayAlert("Alert", message, "Ok");
+        }
+        public void PostRequest(object sender, EventArgs args)
+        {
+            string message = _viewModel.PostHitchhiker(destination.Text);
+            DisplayAlert("Alert", message, "Ok");
+        }
     }
 }

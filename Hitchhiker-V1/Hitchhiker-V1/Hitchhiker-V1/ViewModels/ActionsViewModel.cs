@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Essentials;
 using Hitchhiker_V1.Services;
+using Hitchhiker_V1.Models;
 
 namespace Hitchhiker_V1.ViewModels
 {
@@ -39,6 +40,23 @@ namespace Hitchhiker_V1.ViewModels
         {
             PreferencesHandler preferencesHandler = PreferencesHandler.GetInstance();
             return preferencesHandler.GetPreference(key);
+        }
+
+        public async Task<string> GetHitchhikers()
+        {
+            HttpManager manager = HttpManager.GetInstance();
+            return (await manager.GetAllHitchhikers()).ToString();
+        }
+
+        public string PostHitchhiker(string destination)
+        {
+            HttpManager manager = HttpManager.GetInstance();
+            Hitchhiker hitchhiker = new Hitchhiker();
+            Console.WriteLine("hitchhiker: ");
+            Console.WriteLine(hitchhiker);
+            hitchhiker.Location = new Location(13.4, -12.78);
+            hitchhiker.Destination = destination;
+            return manager.AddHitchhiker(hitchhiker).ToString();
         }
     }
 }

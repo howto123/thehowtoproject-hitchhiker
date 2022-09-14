@@ -12,10 +12,5 @@ namespace Hitchhiker_V1.Views
             InitializeComponent();
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
-        {
-            Console.WriteLine("button clicked yeah!");
-            DisplayAlert("Alert", "You have been alerted", "OK");
-        }
     }
 }
