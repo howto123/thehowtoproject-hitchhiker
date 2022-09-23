@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hitchhicker-Endpoint-V1", "Hitchhicker-Endpoint-V1.csproj", "{A9FABB05-2F87-41AF-BD26-91E514F54A51}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hitchhicker-Endpoint-V1", "Hitchhicker-Endpoint-V1.csproj", "{A9FABB05-2F87-41AF-BD26-91E514F54A51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hitchhiker-Endpoint.Test", "..\HitchhikerTest\Hitchhiker-Endpoint.Test.csproj", "{BBEDA89E-2D41-4B19-98E1-649727C74F80}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{A9FABB05-2F87-41AF-BD26-91E514F54A51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9FABB05-2F87-41AF-BD26-91E514F54A51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9FABB05-2F87-41AF-BD26-91E514F54A51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBEDA89E-2D41-4B19-98E1-649727C74F80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBEDA89E-2D41-4B19-98E1-649727C74F80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBEDA89E-2D41-4B19-98E1-649727C74F80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBEDA89E-2D41-4B19-98E1-649727C74F80}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
