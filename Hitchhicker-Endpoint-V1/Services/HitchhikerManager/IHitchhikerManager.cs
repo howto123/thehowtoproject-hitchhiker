@@ -10,7 +10,7 @@ namespace Hitchhicker_Endpoint_V1.Services.HitchhikerManager
         /// <summary>
         ///  Adds a hitchhiker entity to hitchhikers if the args are valid, throws argument error otherwise
         /// </summary>
-        void Create(string location, double minutesTillDisposal, string destination = "");
+        void Create(string location, double minutesTillDisposal, string? destination = null);
 
         /// <summary>
         ///  Deletes hitchhikers that should not be contained in hitchhikers anymore

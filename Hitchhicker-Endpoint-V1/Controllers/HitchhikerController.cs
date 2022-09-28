@@ -1,7 +1,8 @@
-﻿using Hitchhicker_Endpoint_V1.Services.HitchhikerManager;
+﻿
+using Hitchhicker_Endpoint_V1.Services.HitchhikerManager;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using System.Diagnostics;
+using Hitchhicker_Endpoint_V1.Helpers;
 
 namespace Hitchhicker_Endpoint_V1.Controllers
 {
@@ -15,34 +16,46 @@ namespace Hitchhicker_Endpoint_V1.Controllers
             _manager = manager;
         }
         
-        [Route("/hitchhiker/")]
+        [Route("hitchhikers/")]
         [HttpGet]
         public string GetAll()
         {
             {
+                var responseList = new List<LocationDestination>();
+
                 try
                 {
-                    return JsonConvert.SerializeObject(_manager.Read().ToArray().ToString());
+                    var listFromManager = _manager.Read();
+                    Console.WriteLine("Read them all:");
+                    listFromManager.ForEach(e =>
+                    {
+                        LocationDestination newOne = new(e.GetLocation(), e.GetDestination());
+                        responseList.Add(newOne);
+                    });
                 }
                 catch (Exception e)
                 { 
                     Debug.WriteLine($"{e.Message}");
+                    responseList.Clear();
                 }
 
-                return "Sorry, there was a problem";
+                return HitchhikerHelper.MakeJSON(responseList);
             }
         }
 
-        [Route("hitchhiker/")]
+        [Route("hitchhikers/")]
         [HttpPost]
-        public string Create(CreateArgs request)
+        public object Create(CreateArgs args)
         {
             try
             {
-                if (request.Location != null && request.MinutesTillDisposal != null)
+                string? location = args.Location;
+                int? minutesTillDisposal = args.MinutesTillDisposal;
+                string? destination = args.Destination;
+
+                if (location != null && minutesTillDisposal != null)
                 {
-                    _manager.Create(request.Location, (int)request.MinutesTillDisposal, request.Destination??"");
-                    Debug.WriteLine($"Read: {_manager.Read().Count}");
+                    _manager.Create(location, (int) minutesTillDisposal, destination??"");
                     return $"Hitchhiker created()";
                 }
             }
@@ -52,14 +65,7 @@ namespace Hitchhicker_Endpoint_V1.Controllers
             }
 
             return "Sorry, there was a problem";
-        }
-
-        public class CreateArgs: Object
-        {
-            public string? Location { get; set; }
-            public int? MinutesTillDisposal { get; set; }
-            public string? Destination { get; set; }
-        }
+        }        
     }
 }
 

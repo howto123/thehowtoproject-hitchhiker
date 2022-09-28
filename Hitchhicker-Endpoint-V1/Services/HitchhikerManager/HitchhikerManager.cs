@@ -15,7 +15,7 @@ namespace Hitchhicker_Endpoint_V1.Services.HitchhikerManager
             _builder = builder;
         }
 
-        public void Create(string location, double minutesTillDisposal, string destination = "")
+        public void Create(string location, double minutesTillDisposal, string? destination = null)
         {
             try
             {
