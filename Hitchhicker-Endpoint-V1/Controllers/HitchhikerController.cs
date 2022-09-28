@@ -9,22 +9,14 @@ namespace Hitchhicker_Endpoint_V1.Controllers
     [ApiController]
     public class HitchhikerController : Controller
     {
-        private HitchhikerManager _manager;
+        private IHitchhikerManager _manager;
 
-        public HitchhikerController(HitchhikerManager manager)
+        public HitchhikerController(IHitchhikerManager manager)
         {
             _manager = manager;
         }
-
-        [Route("hitchhiker")]
-        [Route("hitchhiker/index")]
-        [HttpGet]
-        public String Index()
-        {
-            return "Endpoints are available";
-        }
         
-        [Route("/hitchhiker/all")]
+        [Route("/hitchhiker/")]
         [HttpGet]
         public string GetAll()
         {
@@ -62,6 +54,7 @@ namespace Hitchhicker_Endpoint_V1.Controllers
 
             return "Sorry, there was a problem";
         }
+
         public class CreateArgs: Object
         {
             public string? Location { get; set; }

@@ -3,20 +3,13 @@ using System.Diagnostics;
 
 namespace Hitchhicker_Endpoint_V1.Services
 {
-    public class HitchhikerManager
+    public class HitchhikerManager : IHitchhikerManager
     {
-        private static HitchhikerManager? _instance;
         private List<Hitchhiker> _hitchhikers;
 
         public HitchhikerManager()
         {
             _hitchhikers = new List<Hitchhiker>();
-        }
-
-        public static HitchhikerManager GetInstance()
-        {
-            _instance ??= new HitchhikerManager();
-            return _instance;
         }
 
         public void Create(string location, double minutesTillDisposal, string destination = "")
@@ -25,18 +18,12 @@ namespace Hitchhicker_Endpoint_V1.Services
             {
                 Hitchhiker hitchhiker = new(location, minutesTillDisposal, destination);
                 _hitchhikers.Add(hitchhiker);
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 Console.WriteLine($"Error in Manager.Add(): {e.Message}");
                 throw;
             }
-        }
-        
-        public List<Hitchhiker> Read()
-        {
-            Console.WriteLine("Read() called");
-            Console.WriteLine(_hitchhikers.Count);
-            return _hitchhikers;
         }
 
         public void DeleteAllExpired()
@@ -51,9 +38,11 @@ namespace Hitchhicker_Endpoint_V1.Services
             }
         }
 
-        public static void DeleteAll()
+        public List<Hitchhiker> Read()
         {
-            if(_instance!=null) _instance!._hitchhikers.Clear();
+            Console.WriteLine("Read() called");
+            Console.WriteLine(_hitchhikers.Count);
+            return _hitchhikers;
         }
     }
 }

@@ -5,11 +5,16 @@ VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hitchhicker-Endpoint-V1", "Hitchhicker-Endpoint-V1.csproj", "{A9FABB05-2F87-41AF-BD26-91E514F54A51}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hitchhiker-Endpoint.Test", "..\HitchhikerTest\Hitchhiker-Endpoint.Test.csproj", "{BBEDA89E-2D41-4B19-98E1-649727C74F80}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hitchhiker-Endpoint.Unit.Test", "..\HitchhikerTest\Hitchhiker-Endpoint.Unit.Test.csproj", "{BBEDA89E-2D41-4B19-98E1-649727C74F80}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CD7ADA8A-5FB1-43A2-AD34-7DAA93E8D79D}"
 	ProjectSection(SolutionItems) = preProject
 		notes.txt = notes.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hitchhiker-Endpoint.Integration.Test", "..\IntegrationTests\Hitchhiker-Endpoint.Integration.Test.csproj", "{658526AF-5677-4733-8C5C-5F802DA5B8E7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A9FABB05-2F87-41AF-BD26-91E514F54A51} = {A9FABB05-2F87-41AF-BD26-91E514F54A51}
 	EndProjectSection
 EndProject
 Global
@@ -26,6 +31,10 @@ Global
 		{BBEDA89E-2D41-4B19-98E1-649727C74F80}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBEDA89E-2D41-4B19-98E1-649727C74F80}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBEDA89E-2D41-4B19-98E1-649727C74F80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{658526AF-5677-4733-8C5C-5F802DA5B8E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{658526AF-5677-4733-8C5C-5F802DA5B8E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{658526AF-5677-4733-8C5C-5F802DA5B8E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{658526AF-5677-4733-8C5C-5F802DA5B8E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
