@@ -1,19 +1,17 @@
-﻿using Microsoft.AspNetCore.Components.Routing;
-using System.Diagnostics;
-using System.Transactions;
+﻿
 
 namespace Hitchhicker_Endpoint_V1.Entities
 {
-    public class Hitchhiker
+    public class Hitchhiker : IHitchhiker
     {
-        private string _location;
-        private string _destination;
-        private DateTime _timeOfDisposal;
+        private readonly string _location;
+        private readonly string _destination;
+        private readonly DateTime _timeOfDisposal;
 
-        public Hitchhiker(string location, double minutesTillDisposal, string destination="")
+        public Hitchhiker(string location, double minutesTillDisposal, string destination = "")
         {
             // validation
-            if(!AreValidArgs(location, minutesTillDisposal, destination))
+            if (!AreValidArgs(location, minutesTillDisposal, destination))
             {
                 throw new ArgumentException("Hitchhiker could not be created as the arguments were invalid.");
             }
@@ -44,7 +42,7 @@ namespace Hitchhicker_Endpoint_V1.Entities
             // Settings
             const int MAX_DESTINATION_LENGTH = 20;
             const int Min_MIN_TILL_DISPOSAL = 0;
-            const int MAX_MIN_TILL_DISPOSAL = 120;  
+            const int MAX_MIN_TILL_DISPOSAL = 120;
 
             // location
             if (!IsValidLocation(location)) return false;

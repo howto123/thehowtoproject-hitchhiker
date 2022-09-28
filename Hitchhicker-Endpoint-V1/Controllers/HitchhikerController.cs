@@ -1,5 +1,4 @@
-﻿using Hitchhicker_Endpoint_V1.Entities;
-using Hitchhicker_Endpoint_V1.Services;
+﻿using Hitchhicker_Endpoint_V1.Services.HitchhikerManager;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Diagnostics;
@@ -9,7 +8,7 @@ namespace Hitchhicker_Endpoint_V1.Controllers
     [ApiController]
     public class HitchhikerController : Controller
     {
-        private IHitchhikerManager _manager;
+        private readonly IHitchhikerManager _manager;
 
         public HitchhikerController(IHitchhikerManager manager)
         {

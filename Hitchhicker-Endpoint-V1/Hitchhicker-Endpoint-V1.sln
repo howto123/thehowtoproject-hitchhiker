@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hitchhiker-Endpoint.Integra
 		{A9FABB05-2F87-41AF-BD26-91E514F54A51} = {A9FABB05-2F87-41AF-BD26-91E514F54A51}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helpers", "..\Helpers\Helpers.csproj", "{DC4F39BA-199F-48F7-8BDA-25CB01B04382}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{658526AF-5677-4733-8C5C-5F802DA5B8E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{658526AF-5677-4733-8C5C-5F802DA5B8E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{658526AF-5677-4733-8C5C-5F802DA5B8E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC4F39BA-199F-48F7-8BDA-25CB01B04382}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC4F39BA-199F-48F7-8BDA-25CB01B04382}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC4F39BA-199F-48F7-8BDA-25CB01B04382}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC4F39BA-199F-48F7-8BDA-25CB01B04382}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

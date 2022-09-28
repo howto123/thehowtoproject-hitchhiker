@@ -1,6 +1,6 @@
 ﻿using Hitchhicker_Endpoint_V1.Entities;
 
-namespace Hitchhicker_Endpoint_V1.Services
+namespace Hitchhicker_Endpoint_V1.Services.HitchhikerManager
 {
     /// <summary>
     ///  Contains the logic to do anything related to hitchhikers.
@@ -20,6 +20,6 @@ namespace Hitchhicker_Endpoint_V1.Services
         /// <summary>
         ///  Gives back all hitchhikers
         /// </summary>
-        List<Hitchhiker> Read();
+        List<IHitchhiker> Read();
     }
 }

@@ -1,6 +1,7 @@
-﻿using Hitchhicker_Endpoint_V1;
+﻿using Helpers;
 using Hitchhicker_Endpoint_V1.Entities;
-using Hitchhicker_Endpoint_V1.Services;
+using Hitchhicker_Endpoint_V1.Services.BuilderOfIHitchhiker;
+using Hitchhicker_Endpoint_V1.Services.HitchhikerManager;
 
 namespace HitchhikerTest
 {
@@ -11,43 +12,51 @@ namespace HitchhikerTest
         [TestMethod]
         public void Create_ValidNewHitchhikerWithoutLocation_ReadContainsNewHitchhiker()
         {
-            Hitchhiker hitchhikerThatShouldBeCreated = new("hSomewhere", 10);
+            // Arrange
+            IBuilderOfIHitchhiker builder = new BuilderOfIHitchhiker();
+            HitchhikerManager manager = new(builder);
 
-            HitchhikerManager manager = new();
+            IHitchhiker hitchhikerThatShouldBeCreated = builder.BuildIHitchhiker("hSomewhere", 10);
+
             manager.Create("hSomewhere", 10);
-            Hitchhiker hitchhikerThatActuallyWasCreated = manager.Read().Where(h => h.GetLocation() == "hSomewhere").ToList()[0];
+            IHitchhiker hitchhikerThatActuallyWasCreated = manager.Read().Where(h => h.GetLocation() == "hSomewhere").ToList()[0];
 
             Assert.AreEqual(hitchhikerThatActuallyWasCreated.GetDestination(), hitchhikerThatShouldBeCreated.GetDestination());
             Assert.AreEqual(hitchhikerThatActuallyWasCreated.GetLocation(), hitchhikerThatShouldBeCreated.GetLocation());
             Assert.AreEqual(hitchhikerThatActuallyWasCreated.SouldBeDesposed(), hitchhikerThatShouldBeCreated.SouldBeDesposed());
         }
-        /*
+        
         [TestMethod]
         public void Create_ValidNewHitchhikerWitchLocation_ReadContainsNewHitchhiker()
         {
-            Hitchhiker hitchhikerThatShouldBeCreated = new("hSomewhere", 10);
+            IBuilderOfIHitchhiker builder = new BuilderOfIHitchhiker();
+            HitchhikerManager manager = new(builder);
 
-            HitchhikerManager manager = new();
-            manager.Create("hSomewhere", 10, "toElseWhere");
-            Hitchhiker hitchhikerThatActuallyWasCreated = manager.Read().Where(h => h.GetLocation() == "hSomewhere").ToList()[0];
+            const string LOCATION = "somewhere";
+            const int MINUTES_TILL_DISPOSAL = 120;
+            const string DESTINATION = "toElseWhere";
+            // IHitchhiker created by manager will be similar but instanciated a little later
+            IHitchhiker almostHitchhikerThatShouldBeCreated = builder.BuildIHitchhiker(LOCATION, MINUTES_TILL_DISPOSAL, DESTINATION);
 
-            Assert.AreEqual(hitchhikerThatActuallyWasCreated.GetDestination(), hitchhikerThatShouldBeCreated.GetDestination());
-            Assert.AreEqual(hitchhikerThatActuallyWasCreated.GetLocation(), hitchhikerThatShouldBeCreated.GetLocation());
-            Assert.AreEqual(hitchhikerThatActuallyWasCreated.SouldBeDesposed(), hitchhikerThatShouldBeCreated.SouldBeDesposed());
+            manager.Create(LOCATION, MINUTES_TILL_DISPOSAL, DESTINATION);
+            IHitchhiker hitchhikerThatActuallyWasCreated = manager.Read().Where(h => h.GetLocation() == LOCATION).ToList()[0];
+
+            Assert.IsTrue(TestHelpers.HitchhikersAreAlmostEqual(hitchhikerThatActuallyWasCreated, almostHitchhikerThatShouldBeCreated));
         }
-        */
 
         [TestMethod]
         public void Create_NonValidNewHitchhiker_NameTooLong_ExceptionIsThrown()
         {
-            HitchhikerManager manager = new();
+            IBuilderOfIHitchhiker builder = new BuilderOfIHitchhiker();
+            HitchhikerManager manager = new(builder);
             Assert.ThrowsException<ArgumentException>(() => manager.Create("Somewhere in a veeeery long and invalid spot", 10));
         }
 
         [TestMethod]
         public void Create_NonValidNewHitchhiker_NegativeMinutesTillDisposal_ExceptionIsThrown()
         {
-            HitchhikerManager manager = new();
+            IBuilderOfIHitchhiker builder = new BuilderOfIHitchhiker();
+            HitchhikerManager manager = new(builder);
             Assert.ThrowsException<ArgumentException>(() => manager.Create("Somewhere in a veeeery long and invalid spot", 10));
         }
 
@@ -55,7 +64,8 @@ namespace HitchhikerTest
         [TestMethod]
         public void Read_CreatedEntriesShouldContainTheInsertedValuesOrDefault()
         {
-            HitchhikerManager manager = new();
+            IBuilderOfIHitchhiker builder = new BuilderOfIHitchhiker();
+            HitchhikerManager manager = new(builder);
 
             manager.Create("location1", 1, "destination1");
             manager.Create("location2", 2, "destination2");
@@ -95,7 +105,8 @@ namespace HitchhikerTest
         [TestMethod]
         public void DeleteAllExpired_SetTimeout_ExpiredShouldNotBeInList()
         {
-            HitchhikerManager manager = new();
+            IBuilderOfIHitchhiker builder = new BuilderOfIHitchhiker();
+            HitchhikerManager manager = new(builder);
 
             manager.Create("location1", 1 / 6000, "destination1");
             Console.WriteLine(manager.Read().Count());
@@ -110,7 +121,8 @@ namespace HitchhikerTest
         [TestMethod]
         public void DeleteAllExpired_SetTimeout_NotExpiredShouldBeInList()
         {
-            HitchhikerManager manager = new();
+            IBuilderOfIHitchhiker builder = new BuilderOfIHitchhiker();
+            HitchhikerManager manager = new(builder);
 
             manager.Create("location1", 1, "destination1");
             Assert.IsTrue(manager.Read().Count > 0);

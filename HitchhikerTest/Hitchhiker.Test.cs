@@ -1,4 +1,3 @@
-using Hitchhicker_Endpoint_V1;
 using Hitchhicker_Endpoint_V1.Entities;
 
 namespace HitchhikerTest
