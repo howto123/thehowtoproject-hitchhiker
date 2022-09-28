@@ -1,44 +1,74 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Text.Json.Nodes;
+﻿using Hitchhicker_Endpoint_V1.Entities;
+using Hitchhicker_Endpoint_V1.Services;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace Hitchhicker_Endpoint_V1.Controllers
 {
-    /* https://localhost:7090; I copied this out of launchSettings.json */
-
     [ApiController]
     public class HitchhikerController : Controller
     {
+        private HitchhikerManager _manager;
+
+        public HitchhikerController(HitchhikerManager manager)
+        {
+            _manager = manager;
+        }
 
         [Route("hitchhiker")]
         [Route("hitchhiker/index")]
         [HttpGet]
         public String Index()
         {
-            return "Hello";
+            return "Endpoints are available";
         }
         
         [Route("/hitchhiker/all")]
-        //[HttpGet(Name = "all")]
         [HttpGet]
         public string GetAll()
         {
-            return "getAll was called";
-        }
-        
-        [Route("hitchhiker/{arg?}")]
-        // use like this: http://localhost:5090/hitchhiker/myArg
-        [HttpGet]
-        public string GetOne(string arg)
-        {
-            return $"The argument was {arg}";
+            {
+                try
+                {
+                    return JsonConvert.SerializeObject(_manager.Read().ToArray().ToString());
+                }
+                catch (Exception e)
+                { 
+                    Debug.WriteLine($"{e.Message}");
+                }
+
+                return "Sorry, there was a problem";
+            }
         }
 
         [Route("hitchhiker/")]
         [HttpPost]
-        public string Create(JsonObject request)
+        public string Create(CreateArgs request)
         {
-            return $"Create was called: {request?.ToString()}";
-        }
+            try
+            {
+                if (request.Location != null && request.MinutesTillDisposal != null)
+                {
+                    _manager.Create(request.Location, (int)request.MinutesTillDisposal, request.Destination??"");
+                    Debug.WriteLine($"Read: {_manager.Read().Count}");
+                    return $"Hitchhiker created()";
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine($"{e.Message}");
+            }
 
+            return "Sorry, there was a problem";
+        }
+        public class CreateArgs: Object
+        {
+            public string? Location { get; set; }
+            public int? MinutesTillDisposal { get; set; }
+            public string? Destination { get; set; }
+        }
     }
 }
+
+
