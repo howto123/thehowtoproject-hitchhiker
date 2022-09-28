@@ -3,7 +3,7 @@ using Hitchhicker_Endpoint_V1.Entities;
 using Hitchhicker_Endpoint_V1.Services.BuilderOfIHitchhiker;
 using Hitchhicker_Endpoint_V1.Services.HitchhikerManager;
 
-namespace HitchhikerTest
+namespace Hitchhiker_Endpoint_V1.Services.Test
 {
     [TestClass]
     public class HitchhikerManagerTest
@@ -25,7 +25,7 @@ namespace HitchhikerTest
             Assert.AreEqual(hitchhikerThatActuallyWasCreated.GetLocation(), hitchhikerThatShouldBeCreated.GetLocation());
             Assert.AreEqual(hitchhikerThatActuallyWasCreated.SouldBeDesposed(), hitchhikerThatShouldBeCreated.SouldBeDesposed());
         }
-        
+
         [TestMethod]
         public void Create_ValidNewHitchhikerWitchLocation_ReadContainsNewHitchhiker()
         {
@@ -112,7 +112,7 @@ namespace HitchhikerTest
             Console.WriteLine(manager.Read().Count());
             Assert.IsTrue(manager.Read().Count > 0);
 
-            System.Threading.Thread.Sleep(500);
+            Thread.Sleep(500);
 
             manager.DeleteAllExpired();
             Assert.IsTrue(manager.Read().Count == 0);
@@ -127,7 +127,7 @@ namespace HitchhikerTest
             manager.Create("location1", 1, "destination1");
             Assert.IsTrue(manager.Read().Count > 0);
 
-            System.Threading.Thread.Sleep(500);
+            Thread.Sleep(500);
 
             manager.DeleteAllExpired();
             Console.WriteLine(manager.Read().Count());

@@ -1,12 +1,12 @@
 using Hitchhicker_Endpoint_V1.Entities;
 
-namespace HitchhikerTest
+namespace Hitchhiker_Endpoint_V1.Entities.Test
 {
     [TestClass]
     public class HitchhikerTest
     {
         [TestMethod]
-        public void Constructor_WithValidArgumentsIncludingLocation_CreatesValidObject ()
+        public void Constructor_WithValidArgumentsIncludingLocation_CreatesValidObject()
         {
             // Arrange
             string location = "hello";
@@ -49,7 +49,7 @@ namespace HitchhikerTest
             Hitchhiker hitchhiker;
 
             // Act, Assert
-            Assert.ThrowsException<ArgumentException>( () => hitchhiker = new(location, minutesTillDisposal));
+            Assert.ThrowsException<ArgumentException>(() => hitchhiker = new(location, minutesTillDisposal));
         }
 
         [TestMethod]
@@ -69,7 +69,7 @@ namespace HitchhikerTest
         {
             // Arrange
             string location = "hello";
-            double minutesTillDisposal = 0.001/60;
+            double minutesTillDisposal = 0.001 / 60;
 
             // Act
             Hitchhiker hitchhiker = new(location, minutesTillDisposal);
@@ -89,7 +89,7 @@ namespace HitchhikerTest
             Hitchhiker hitchhiker = new(location, minutesTillDisposal);
 
             // Wait and assert
-            System.Threading.Thread.Sleep(1);
+            Thread.Sleep(1);
             Assert.AreEqual(hitchhiker.SouldBeDesposed(), true);
         }
     }
