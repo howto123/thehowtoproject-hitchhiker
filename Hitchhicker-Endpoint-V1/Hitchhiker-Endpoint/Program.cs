@@ -1,15 +1,43 @@
 using Hitchhicker_Endpoint.Services.Builder;
 using Hitchhicker_Endpoint.Services.HitchhikerManager;
+using Hitchhicker_Endpoint_V1.System;
 
-var builder = WebApplication.CreateBuilder(args);
+CustomLauncher.Launch(args);
 
-builder.Services.AddControllers();
-builder.Services.
-    AddSingleton<IBuilderOfIHitchhiker, BuilderOfIHitchhiker>().
-    AddSingleton<IHitchhikerManager, HitchhikerManager>();
+public static class CustomLauncher
+{
+    public static string[] launcherArgs = new string[0];
 
-var app = builder.Build();
+    public static void Launch(string[] args)
+    {
+        launcherArgs = args;
 
-app.MapControllers();
+        Thread threadWeb = new Thread(launchWebApp);
+        Thread threadTimer = new Thread(launchTimer);
 
-app.Run();
+        threadWeb.Start();
+        threadTimer.Start();
+    }
+
+    public static void launchTimer()
+    {
+        TimerEventCreator.CreateTimer();
+    }
+
+    public static void launchWebApp()
+    {
+        // prepare
+        var builder = WebApplication.CreateBuilder(launcherArgs);
+
+        builder.Services.AddControllers();
+        builder.Services.
+            AddSingleton<IBuilderOfIHitchhiker, BuilderOfIHitchhiker>().
+            AddSingleton<IHitchhikerManager, HitchhikerManager>();
+
+        var app = builder.Build();
+        app.MapControllers();
+
+        // start
+        app.Run();
+    }
+}
