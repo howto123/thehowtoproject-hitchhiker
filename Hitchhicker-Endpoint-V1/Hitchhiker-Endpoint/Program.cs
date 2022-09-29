@@ -1,51 +1,30 @@
 using Hitchhicker_Endpoint.Services.Builder;
 using Hitchhicker_Endpoint.Services.HitchhikerManager;
-using Hitchhicker_Endpoint_V1.System;
+using Hitchhicker_Endpoint.StartUp;
+using Hitchhicker_Endpoint.System;
 
-// prepare
+// settings
+const int INTERVALL_IN_SECONDS = 7;
+
+// create builder
 var builder = WebApplication.CreateBuilder(args);
 
+// subscribe services
 builder.Services.AddControllers();
 builder.Services.
     AddSingleton<IBuilderOfIHitchhiker, BuilderOfIHitchhiker>().
     AddSingleton<IHitchhikerManager, HitchhikerManager>();
 
+// create webapp
 var app = builder.Build();
+
+// add endpoints
 app.MapControllers();
 
+// create dependencies for launcher
+IHitchhikerManager hitchhikerManager = app.Services.GetRequiredService<IHitchhikerManager>();
+TimerEventManager timerEventManager = new(INTERVALL_IN_SECONDS, hitchhikerManager);
 
-var launcher = new CustomLauncher(app, app.Services.GetRequiredService<IHitchhikerManager>());
+// launch
+var launcher = new CustomLauncher(app, timerEventManager);
 launcher.Launch();
-
-public class CustomLauncher
-{
-    private IHitchhikerManager _hitchhikerManager;
-    private TimerEventManager _timerEventManager;
-    private WebApplication _app;
-
-    public CustomLauncher(WebApplication app, IHitchhikerManager hitchhikerManager)
-    {
-        const int INTERVALL_IN_SECONDS = 7;
-        _app = app;
-        _hitchhikerManager = hitchhikerManager;
-        _timerEventManager = new TimerEventManager(INTERVALL_IN_SECONDS, _hitchhikerManager);
-    }
-    public void Launch()
-    {
-        Thread threadWeb = new Thread(LaunchWebApp);
-        Thread threadTimer = new Thread(LaunchTimer);
-
-        threadWeb.Start();
-        threadTimer.Start();
-    }
-
-    private void LaunchTimer()
-    {
-        _timerEventManager.LaunchTimerEvents();
-    }
-
-    private void LaunchWebApp()
-    {
-        _app.Run();
-    }
-}
