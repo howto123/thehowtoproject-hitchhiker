@@ -41,13 +41,13 @@ namespace Hitchhicker_Endpoint.Controllers
             {
                 // read args
                 string? location = args.Location;
-                int? minutesTillDisposal = args.MinutesTillDisposal;
+                double? minutesTillDisposal = args.MinutesTillDisposal;
                 string? destination = args.Destination;
 
                 // make call
                 if (location != null && minutesTillDisposal != null)
                 {
-                    _manager.Create(location, (int) minutesTillDisposal, destination??null);
+                    _manager.Create(location, (double) minutesTillDisposal, destination??null);
                     return $"Hitchhiker created()";
                 }
             }

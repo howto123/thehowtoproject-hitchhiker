@@ -42,8 +42,6 @@ namespace Hitchhicker_Endpoint.Services.HitchhikerManager
 
         public List<IHitchhiker> Read()
         {
-            Console.WriteLine("Read() called");
-            Console.WriteLine(_hitchhikers.Count);
             return _hitchhikers;
         }
     }
