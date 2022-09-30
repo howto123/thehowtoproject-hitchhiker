@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Hitchhiker_V1.Models;
-using Xamarin.Essentials;
 
-namespace Hitchhiker_V1.Services
+namespace Services.Http
 {
     // singleton
-    internal class HttpManager
+    public class HttpManager : IHttpManager
     {
         // Public property
-        
+
 
         // Public methods
         public string AddHitchhiker(Hitchhiker hitchhiker)
@@ -25,23 +23,24 @@ namespace Hitchhiker_V1.Services
 
             try
             {
-                HttpResponseMessage response = await client.GetAsync(this.uri);
+                HttpResponseMessage response = await client.GetAsync(uri);
 
                 Console.WriteLine("response:");
                 Console.WriteLine(response);
                 Console.WriteLine("StatusCode");
                 Console.WriteLine(response.IsSuccessStatusCode);
-                
+
                 string content = await response.Content.ReadAsStringAsync();
                 Console.WriteLine(content);
                 //Hitchhikers = JsonSerializer.Deserialize<List<Hitchhiker>>(content);
-                
-            } catch (Exception err)
+
+            }
+            catch (Exception err)
             {
                 Console.WriteLine("Error!");
                 Console.WriteLine(err.Message);
             }
-            
+
             return Hitchhikers;
         }
 
@@ -55,7 +54,7 @@ namespace Hitchhiker_V1.Services
 
         public static HttpManager GetInstance()
         {
-            if(instance == null)
+            if (instance == null)
             {
                 instance = new HttpManager();
             }

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Services.Http;
+using Services.LocationAccess;
+using Services.MapsAccess;
+using System;
 using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -8,9 +11,16 @@ namespace Hitchhiker_V1.ViewModels
     public class MapsViewModel : BaseViewModel
     {
         public string Text { get; set; }
-        public MapsViewModel()
+
+        //private readonly IMapsManager _mapsManager;
+
+        public MapsViewModel(/*IMapsManager mapsManager*/)
         {
-            Title = "Map";
+            //_mapsManager = new MapsManager();
+
+            //_mapsManager.ToString();
+
+            //Title = "Map";
             Text = "Your location not shared. Go to 'Actions' to change status.";
         }
 

@@ -1,9 +1,7 @@
-﻿using Hitchhiker_V1.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Xamarin.Forms;
 
 namespace Hitchhiker_V1.ViewModels
 {

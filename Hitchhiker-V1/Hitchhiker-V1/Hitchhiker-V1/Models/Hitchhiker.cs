@@ -5,7 +5,7 @@ using Xamarin.Essentials;
 
 namespace Hitchhiker_V1.Models
 {
-    internal class Hitchhiker
+    public class Hitchhiker
     {
         // Properties
         public Location Location { get; set; }

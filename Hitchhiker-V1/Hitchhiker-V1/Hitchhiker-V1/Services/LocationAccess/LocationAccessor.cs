@@ -3,32 +3,37 @@ using System.Threading.Tasks;
 using System.Threading;
 using Xamarin.Essentials;
 
-namespace Hitchhiker_V1.Services
+namespace Services.LocationAccess
 {
-    public class LocationAccesser
+    public class LocationAccessor
     {
         // Public constructor
-        public static async Task<LocationAccesser> CreateAsync()
+        public LocationAccessor()
         {
-            return new LocationAccesser(await LocationAccesser.GetCurrentLocation());
+            // empty for now
+        }
+
+        public static async Task<LocationAccessor> CreateAsync()
+        {
+            return new LocationAccessor(await GetCurrentLocation());
         }
 
         // Public Methods
         public Location GetLocation()
         {
-            return this.Location;
+            return Location;
         }
 
         public void UpdateLocation()
         {
-            Task.Run(this.UpdateLocationAsync);
+            Task.Run(UpdateLocationAsync);
         }
 
         // Private poperties
         private Location Location { get; set; }
 
         // Private constructor
-        private LocationAccesser(Location location)
+        private LocationAccessor(Location location)
         {
             Location = location;
         }
@@ -36,7 +41,7 @@ namespace Hitchhiker_V1.Services
         // Private methods
         private async void UpdateLocationAsync()
         {
-            this.Location = await LocationAccesser.GetCurrentLocation();
+            Location = await GetCurrentLocation();
         }
 
         private static async Task<Location> GetCurrentLocation()

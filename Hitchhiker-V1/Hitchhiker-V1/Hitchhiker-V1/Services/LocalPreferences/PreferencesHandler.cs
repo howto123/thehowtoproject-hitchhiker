@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using Xamarin.Essentials;
 
-namespace Hitchhiker_V1.Services
+namespace Services.LocalPreferences
 {
-    internal class PreferencesHandler
+    internal class PreferencesHandler : IPreferencesHandler
     {
         // As this is a singleton, there is a public accessor (singleton is not thread safe, but that's ok here)
         public static PreferencesHandler GetInstance()
