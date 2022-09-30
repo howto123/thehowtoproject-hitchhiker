@@ -68,6 +68,6 @@ namespace Services.Http
 
 
         // private constructor
-        private HttpManager() { /* empty */ }
+        public HttpManager() { /* empty */ }
     }
 }

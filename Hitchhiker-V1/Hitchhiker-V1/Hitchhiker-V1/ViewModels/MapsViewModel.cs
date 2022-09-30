@@ -12,13 +12,13 @@ namespace Hitchhiker_V1.ViewModels
     {
         public string Text { get; set; }
 
-        //private readonly IMapsManager _mapsManager;
+        private readonly IMapsManager _mapsManager;
 
-        public MapsViewModel(/*IMapsManager mapsManager*/)
+        public MapsViewModel(IMapsManager mapsManager)
         {
-            //_mapsManager = new MapsManager();
+            _mapsManager = mapsManager;
 
-            //_mapsManager.ToString();
+            Console.Write(_mapsManager);
 
             //Title = "Map";
             Text = "Your location not shared. Go to 'Actions' to change status.";

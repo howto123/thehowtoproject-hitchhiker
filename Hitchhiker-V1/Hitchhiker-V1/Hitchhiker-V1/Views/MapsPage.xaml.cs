@@ -17,10 +17,10 @@ namespace Hitchhiker_V1.Views
             InitializeComponent();
 
             // get dependencies to inject
-            //var mapsSingleton = DependencyService.Get<IMapsManager>();
+            var mapsSingleton = DependencyService.Get<IMapsManager>();
 
             // create viewModel
-            _viewModel = new MapsViewModel(/*mapsSingleton*/);
+            _viewModel = new MapsViewModel(mapsSingleton);
 
             // bind context
             BindingContext = _viewModel;
