@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Timers;
 
 namespace Services.TimerEvents
@@ -9,15 +7,34 @@ namespace Services.TimerEvents
     {
         private readonly Timer _timer;
 
-        IntervallEventHandler()
+        public event ElapsedEventHandler Tick;
+        public IntervallEventHandler()
         {
-            _timer = new Timer();
+            try
+            {
+                var interval = int.Parse(Environment.GetEnvironmentVariable("timerInterval"));
+                _timer = new Timer
+                {
+                    Interval = interval * 1000,
+                    AutoReset = true,
+                };
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
-        public void LaunchTimerEvents(int intervalInSeconds)
+        public void LaunchTimerEvents()
         {
-            _timer.Interval = intervalInSeconds;
-            Console.WriteLine(intervalInSeconds);
+
+            _timer.Elapsed += OnElapsed;
+            _timer.Enabled = true;
+        }
+
+        private void OnElapsed(object o, ElapsedEventArgs args)
+        {
+            Tick?.Invoke(0, args);
         }
     }
 }

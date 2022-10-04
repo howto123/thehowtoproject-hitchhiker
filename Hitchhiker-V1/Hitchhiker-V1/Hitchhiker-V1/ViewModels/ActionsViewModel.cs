@@ -1,66 +1,104 @@
 ﻿using System;
-using System.Threading.Tasks;
-using Xamarin.Essentials;
+using System.Windows.Input;
 using Hitchhiker_V1.Models;
 using Services.Http;
-using Services.LocalPreferences;
-using Services.MapsAccess;
 using Services.LocationAccess;
 using Xamarin.Forms;
+using System.ComponentModel;
+using Services.LocalPreferences;
+using Services.GlobalState;
 
 namespace Hitchhiker_V1.ViewModels
 {
-    public class ActionsViewModel : BaseViewModel
+    public class ActionsViewModel : INotifyPropertyChanged
     {
+        public string Title { get; private set; }
+        public string DestinationEntry { get; set; }
+        public string DurationEntry { get; set; }
+
+        public bool SaveDestination { get; set; }
+
+
+        public ICommand SubmitClicked { get; private set; }
+        public ICommand ChangeSaveLocation { get; private set; }
+
         private readonly IHttpManager _httpManager;
-        private IMapsManager _mapsManager;
-        public ActionsViewModel(IHttpManager http, IMapsManager maps)
+        private readonly ILocationAccessor _locationAccessor;
+        private readonly IPreferencesHandler _preferencesHandler;
+        private readonly CustomState _state;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public ActionsViewModel()
         {
+            _httpManager = DependencyService.Get<IHttpManager>();
+            _locationAccessor = DependencyService.Get<ILocationAccessor>();
+            _preferencesHandler = DependencyService.Get<IPreferencesHandler>();
+            _state = DependencyService.Get<CustomState>();
+
             Title = "Actions";
-            _httpManager = http;
-            _mapsManager = maps;
+            DestinationEntry = LoadDestinationOrEmptyString();
+            DurationEntry = "";
+            SaveDestination = false;
+
+            SubmitClicked = new Command(HandleSubmitClicked);
+            ChangeSaveLocation = new Command(HandleChangeSaveLocation);
         }
 
-        public void OnAppearing()
+        private void HandleSubmitClicked()
         {
-            IsBusy = true;
+            PostHitchhiker();
+
+            if (SaveDestination && DestinationEntry!="")
+            {
+                StoreDestination();
+            }
+
+            Console.WriteLine($"LocationVisible: {_state.LocationVisible}");
+            _state.LocationVisible = true;
+            Console.WriteLine($"LocationVisible: {_state.LocationVisible}");
         }
 
-        public async Task<string> ShowMeClicked()
+        private async void PostHitchhiker()
         {
-            LocationAccessor locationAccesser = await LocationAccessor.CreateAsync();
-            Location location = locationAccesser.GetLocation();
-            return $"Location is: {location.Latitude}, {location.Longitude}";
+            try
+            {
+                var location = await _locationAccessor.GetLocation();
+                var hitchhiker = new Hitchhiker()
+                {
+                    Location = location,
+                    Destination = DestinationEntry
+                };
+                _httpManager.AddHitchhiker(hitchhiker);
+            }
+            catch (Exception e)
+            {
+                HandleException("postHitchhiker", e);
+            }
         }
 
-
-        public string SetPreference(string key, string value)
+        private void StoreDestination()
         {
-            PreferencesHandler preferencesHandler = PreferencesHandler.GetInstance();
-            preferencesHandler.SetPreference(key, value);
-            return "Preference set successfully!";
-        }
-        public string GetPreference(string key)
-        {
-            PreferencesHandler preferencesHandler = PreferencesHandler.GetInstance();
-            return preferencesHandler.GetPreference(key);
+            _preferencesHandler.SetPreference("Destination", DestinationEntry);
+            Console.WriteLine("save destination called");
         }
 
-        public async Task<string> GetHitchhikers()
+        private string LoadDestinationOrEmptyString()
         {
-            HttpManager manager = HttpManager.GetInstance();
-            return (await manager.GetAllHitchhikers()).ToString();
+            return _preferencesHandler.GetPreference("Destination")??"";
         }
 
-        public string PostHitchhiker(string destination)
+        private void HandleChangeSaveLocation()
         {
-            HttpManager manager = HttpManager.GetInstance();
-            Hitchhiker hitchhiker = new Hitchhiker();
-            Console.WriteLine("hitchhiker: ");
-            Console.WriteLine(hitchhiker);
-            hitchhiker.Location = new Location(13.4, -12.78);
-            hitchhiker.Destination = destination;
-            return manager.AddHitchhiker(hitchhiker).ToString();
+            SaveDestination = !SaveDestination;
+
+            var changedArgs = new PropertyChangedEventArgs(nameof(SaveDestination));
+            PropertyChanged.Invoke(this, changedArgs);
+        }
+
+        private void HandleException(string origin, Exception e)
+        {
+            Console.WriteLine($"Exception in {origin} {e.Message}");
         }
     }
 }

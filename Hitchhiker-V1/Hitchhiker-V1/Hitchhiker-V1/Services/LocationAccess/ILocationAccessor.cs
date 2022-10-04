@@ -1,4 +1,5 @@
-﻿using Xamarin.Essentials;
+﻿using System.Threading.Tasks;
+using Xamarin.Essentials;
 
 namespace Services.LocationAccess
 {
@@ -7,7 +8,6 @@ namespace Services.LocationAccess
     /// </summary>
     public interface ILocationAccessor
     {
-        Location GetLocation();
-        void UpdateLocation();
+        Task<Location> GetLocation();
     }
 }
