@@ -1,5 +1,8 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Hitchhiker_V1.Models;
 
@@ -8,12 +11,46 @@ namespace Services.Http
     // singleton
     public class HttpManager : IHttpManager
     {
-        // Public property
+        // private attribute
+        private HttpClient client;
+        private readonly Uri uri;
+        public HttpManager()
+        {
+            try
+            {
+                this.uri = new Uri(Environment.GetEnvironmentVariable("hitchhikerUri"));
+            }
+            catch
+            {
+                throw new Exception("Defauilt constructor; hitchhikerUri not defined in env");
+            }
 
+            this.client = new HttpClient();
+        }
+        public HttpManager(Uri uri=null, HttpClient client=null)
+        {
+            if (uri != null)
+            {
+                this.uri = uri;
+            }
+            else
+            {
+                try
+                {
+                    this.uri = new Uri(Environment.GetEnvironmentVariable("hitchhikerUri"));
+                }
+                catch
+                {
+                    throw new Exception("Neigther environment nor constructor arg specify uri");
+                }
+            }
 
-        // Public methods
+            this.client = client ?? new HttpClient();
+        }
+
         public string AddHitchhiker(Hitchhiker hitchhiker)
         {
+            Console.WriteLine("HttpManager: AddHitchhiker() called.");
             return "method not implemented yet...";
         }
 
@@ -37,37 +74,10 @@ namespace Services.Http
             }
             catch (Exception err)
             {
-                Console.WriteLine("Error!");
                 Console.WriteLine(err.Message);
             }
 
             return Hitchhikers;
         }
-
-        /*
-        //possibly an improvement?
-        public Hitchhiker[] GetFilteredHitchhikers(Filter filter)
-        {
-            // ...
-        }
-        */
-
-        public static HttpManager GetInstance()
-        {
-            if (instance == null)
-            {
-                instance = new HttpManager();
-            }
-            return instance;
-        }
-
-        // private attribute
-        private static HttpManager instance = null;
-        private HttpClient client = new HttpClient();
-        private readonly Uri uri = new Uri("https://postman-echo.com/get");
-
-
-        // private constructor
-        public HttpManager() { /* empty */ }
     }
 }

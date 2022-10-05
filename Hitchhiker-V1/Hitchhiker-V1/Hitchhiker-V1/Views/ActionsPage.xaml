@@ -1,22 +1,78 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Hitchhiker_V1.Views.ActionsPage"
-             Title="{Binding Title}"
-             xmlns:local="clr-namespace:Hitchhiker_V1.ViewModels"
-             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
-             x:Name="BrowseItemsPage">
-
-    <StackLayout>
-        <Label Text="Choose how long you want to share your location ad destination:" />
-        <Button Text="Show me as hitchhiker on map." Clicked="ShowMeClicked"/>
-        <Button Text="Store key-value pair into preferences." Clicked="StoreToPreferences"/>
-        <Entry x:Name="setKey" Text="" Placeholder="setKey" />
-        <Entry x:Name="setValue" Text="" Placeholder="setValue" />
-        <Button Text="Alert Specified Preference" Clicked="GetPreference"/>
-        <Entry x:Name="getKey" Text="" Placeholder="Give key, get value..." />
-        <Button Text="GetRequest" Clicked="GetRequest"/>
-        <Button Text="PostRequest" Clicked="PostRequest"/>
-        <Entry x:Name="destination" Text="" Placeholder="Your destination?" />
-    </StackLayout>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Hitchhiker_V1.Views.ActionsPage"
+    Title="{Binding Title}"
+    xmlns:vm="clr-namespace:Hitchhiker_V1.ViewModels"
+    >
+    <ContentPage.BindingContext>
+        <vm:ActionsViewModel />
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+        <StackLayout
+            Margin="20"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill"
+            >
+            <Label
+                x:Name="destinationLabel"
+                Text="Set your destination:"
+                TextColor="Black"
+                Margin="5"
+                />
+            <Entry 
+                x:Name="destinationEntry"
+                Text="{Binding DestinationEntry}"
+                Placeholder="e.g. Paris"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Margin="5, 5, 5, 30"
+                />
+            <Label
+                x:Name="durationLabel"
+                Text="How many minutes do you want to be visible:"
+                TextColor="Black"
+                Margin="5"
+                />
+            <Entry 
+                x:Name="durationEntry"
+                Text="{Binding DurationEntry}"
+                Placeholder="e.g. 45"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Margin="5, 5, 5, 30"
+                />
+            <StackLayout
+                Orientation="Horizontal">
+                <CheckBox
+                    x:Name="SaveDestinationCheck"
+                    IsChecked="{Binding SaveDestination, Mode=TwoWay}"
+                />
+                <Label
+                    VerticalTextAlignment="Center"
+                    x:Name="saveDestinationLabel"
+                    Text="save destination for next time"
+                    >
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ChangeSaveLocation}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+            <Label
+                x:Name="warningLabel"
+                Text="If you press this button, you will be visible to anybody. Please be careful! Enjoy your travels :)"
+                TextColor="Black"
+                Margin="5"
+                />
+            <Button
+                x:Name="submit"
+                Text="Show me on the map!"
+                Command="{Binding SubmitClicked}"
+                VerticalOptions="End"
+                Margin="5"
+                />
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>

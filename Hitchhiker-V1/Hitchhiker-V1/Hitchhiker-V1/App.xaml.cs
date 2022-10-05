@@ -1,9 +1,11 @@
 ﻿using Hitchhiker_V1.ViewModels;
+using Services.GlobalState;
 using Services.Http;
 using Services.LocalPreferences;
 using Services.LocationAccess;
 using Services.MapsAccess;
 using Services.TimerEvents;
+using System;
 using Xamarin.Forms;
 
 namespace Hitchhiker_V1
@@ -13,33 +15,40 @@ namespace Hitchhiker_V1
 
         public App()
         {
+            const string URI = "https://postman-echo.com/get";
+            Environment.SetEnvironmentVariable("hitchhikerUri", URI);
+
+            const int INTERVAL_IN_SECONDS = 2;
+            Environment.SetEnvironmentVariable("timerInterval", INTERVAL_IN_SECONDS.ToString());
+
+
             InitializeComponent();
 
+            
             //Subscribing dependencies as singleton
-            var http = DependencyService.Get<HttpManager>();
-            DependencyService.RegisterSingleton(http);
+            var httpManager = new HttpManager(null, null);
+            DependencyService.RegisterSingleton(httpManager);
             DependencyService.Register<IHttpManager, HttpManager>();
-  /*          
+            
             var preferencesHandler = DependencyService.Get<PreferencesHandler>();
             DependencyService.RegisterSingleton(preferencesHandler);
             DependencyService.Register<IPreferencesHandler, PreferencesHandler>();
-            
+              
             var locationAccessor = DependencyService.Get<LocationAccessor>();
             DependencyService.RegisterSingleton(locationAccessor);
             DependencyService.Register<ILocationAccessor, LocationAccessor>();
- */           
-            
-            var mapsManager = DependencyService.Get<MapsManager>();
+          
+            var mapsManager = new MapsManager();
             DependencyService.RegisterSingleton(mapsManager);
             DependencyService.Register<IMapsManager, MapsManager>();
-/*            
-            var intervallHandler = DependencyService.Get<IntervallEventHandler>();
+
+            var state = new CustomState();
+            DependencyService.RegisterSingleton<CustomState>(state);
+
+            var intervallHandler = new IntervallEventHandler();
             DependencyService.RegisterSingleton(intervallHandler);
             DependencyService.Register<IIntervallEventHandler, IntervallEventHandler>();
-            
-            DependencyService.Register<ActionsViewModel>();
-            DependencyService.Register<MapsViewModel>();
-*/
+
             MainPage = new AppShell();
         }
 
