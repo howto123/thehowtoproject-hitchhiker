@@ -20,7 +20,7 @@ namespace Hitchhicker_Endpoint.Entities.Tests
             Assert.IsInstanceOfType(hitchhiker, typeof(Hitchhiker));
             Assert.AreEqual(hitchhiker.GetLocation(), location);
             Assert.AreEqual(hitchhiker.GetDestination(), destination);
-            Assert.AreEqual(hitchhiker.SouldBeDesposed(), false);
+            Assert.AreEqual(hitchhiker.ShouldBeDesposed(), false);
         }
 
         [TestMethod]
@@ -37,7 +37,7 @@ namespace Hitchhicker_Endpoint.Entities.Tests
             Assert.IsInstanceOfType(hitchhiker, typeof(Hitchhiker));
             Assert.AreEqual(hitchhiker.GetLocation(), location);
             Assert.AreEqual(hitchhiker.GetDestination(), "");
-            Assert.AreEqual(hitchhiker.SouldBeDesposed(), false);
+            Assert.AreEqual(hitchhiker.ShouldBeDesposed(), false);
         }
 
         [TestMethod]
@@ -75,7 +75,7 @@ namespace Hitchhicker_Endpoint.Entities.Tests
             Hitchhiker hitchhiker = new(location, minutesTillDisposal);
 
             // Assert
-            Assert.AreEqual(hitchhiker.SouldBeDesposed(), false);
+            Assert.AreEqual(hitchhiker.ShouldBeDesposed(), false);
         }
 
         [TestMethod]
@@ -90,7 +90,7 @@ namespace Hitchhicker_Endpoint.Entities.Tests
 
             // Wait and assert
             Thread.Sleep(1);
-            Assert.AreEqual(hitchhiker.SouldBeDesposed(), true);
+            Assert.AreEqual(hitchhiker.ShouldBeDesposed(), true);
         }
     }
 }

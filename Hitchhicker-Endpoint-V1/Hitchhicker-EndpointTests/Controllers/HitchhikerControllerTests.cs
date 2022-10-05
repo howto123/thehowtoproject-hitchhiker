@@ -79,7 +79,7 @@ namespace Hitchhicker_Endpoint.Controllers.Tests
             // Arrange
             const string LOCATION = "somewhere";
             const int MINUTES_TILL_DISPOSAL = 1;
-            CreateArgs args = new()
+            PostArgs args = new()
             {
                 Location = LOCATION,
                 MinutesTillDisposal = MINUTES_TILL_DISPOSAL
@@ -103,7 +103,7 @@ namespace Hitchhicker_Endpoint.Controllers.Tests
             // Arrange
             const string? LOCATION = null;
             const int MINUTES_TILL_DISPOSAL = 1;
-            CreateArgs args = new()
+            PostArgs args = new()
             {
                 Location = LOCATION,
                 MinutesTillDisposal = MINUTES_TILL_DISPOSAL
@@ -127,7 +127,7 @@ namespace Hitchhicker_Endpoint.Controllers.Tests
             // Arrange
             const string? LOCATION = null;
             const int MINUTES_TILL_DISPOSAL = 1;
-            CreateArgs args = new()
+            PostArgs args = new()
             {
                 Location = LOCATION,
                 MinutesTillDisposal = MINUTES_TILL_DISPOSAL
@@ -151,7 +151,7 @@ namespace Hitchhicker_Endpoint.Controllers.Tests
             const string LOCATION = "somewhere";
             const int MINUTES_TILL_DISPOSAL = 1;
             const string DESTINATION = "somewhere";
-            CreateArgs args = new()
+            PostArgs args = new()
             {
                 Location = LOCATION,
                 MinutesTillDisposal = MINUTES_TILL_DISPOSAL,
@@ -180,15 +180,15 @@ namespace Hitchhicker_Endpoint.Controllers.Tests
 
             // set up behaviour
             hitchhikerMock1.Setup(mock => mock.GetLocation()).Returns("a");
-            hitchhikerMock1.Setup(mock => mock.SouldBeDesposed()).Returns(false);
+            hitchhikerMock1.Setup(mock => mock.ShouldBeDesposed()).Returns(false);
             hitchhikerMock1.Setup(mock => mock.GetDestination()).Returns("e");
 
             hitchhikerMock2.Setup(mock => mock.GetLocation()).Returns("b");
-            hitchhikerMock2.Setup(mock => mock.SouldBeDesposed()).Returns(false);
+            hitchhikerMock2.Setup(mock => mock.ShouldBeDesposed()).Returns(false);
             hitchhikerMock2.Setup(mock => mock.GetDestination()).Returns("");
 
             hitchhikerMock3.Setup(mock => mock.GetLocation()).Returns("c");
-            hitchhikerMock3.Setup(mock => mock.SouldBeDesposed()).Returns(true);
+            hitchhikerMock3.Setup(mock => mock.ShouldBeDesposed()).Returns(true);
             hitchhikerMock3.Setup(mock => mock.GetDestination()).Returns("f");
 
             // create list

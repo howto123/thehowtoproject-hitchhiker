@@ -23,7 +23,7 @@ namespace Hitchhicker_Endpoint.Services.HitchhikerManager.Tests
 
             Assert.AreEqual(hitchhikerThatActuallyWasCreated.GetDestination(), hitchhikerThatShouldBeCreated.GetDestination());
             Assert.AreEqual(hitchhikerThatActuallyWasCreated.GetLocation(), hitchhikerThatShouldBeCreated.GetLocation());
-            Assert.AreEqual(hitchhikerThatActuallyWasCreated.SouldBeDesposed(), hitchhikerThatShouldBeCreated.SouldBeDesposed());
+            Assert.AreEqual(hitchhikerThatActuallyWasCreated.ShouldBeDesposed(), hitchhikerThatShouldBeCreated.ShouldBeDesposed());
         }
 
         [TestMethod]
@@ -76,19 +76,19 @@ namespace Hitchhicker_Endpoint.Services.HitchhikerManager.Tests
 
             foreach (Hitchhiker entry in list)
             {
-                if (entry.GetLocation() == "location1" && entry.SouldBeDesposed() == false && entry.GetDestination() == "destination1")
+                if (entry.GetLocation() == "location1" && entry.ShouldBeDesposed() == false && entry.GetDestination() == "destination1")
                 {
                     check1 = true;
                 }
-                if (entry.GetLocation() == "location2" && entry.SouldBeDesposed() == false && entry.GetDestination() == "destination2")
+                if (entry.GetLocation() == "location2" && entry.ShouldBeDesposed() == false && entry.GetDestination() == "destination2")
                 {
                     check2 = true;
                 }
-                if (entry.GetLocation() == "location3" && entry.SouldBeDesposed() == false && entry.GetDestination() == "")
+                if (entry.GetLocation() == "location3" && entry.ShouldBeDesposed() == false && entry.GetDestination() == "")
                 {
                     check3 = true;
                 }
-                if (entry.GetLocation() == "location4" && entry.SouldBeDesposed() == false && entry.GetDestination() == "")
+                if (entry.GetLocation() == "location4" && entry.ShouldBeDesposed() == false && entry.GetDestination() == "")
                 {
                     // should not exist
                     check4 = true;
