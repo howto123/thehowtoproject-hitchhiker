@@ -17,7 +17,7 @@ namespace Hitchhicker_Endpoint.Helpers
                        });
         }
 
-
+        // REVIEWER: hiker anstatt hitchhhiker? sind die Namen zu lang?
         public static List<LocationDestination> MakeLocationDestinationList(List<IHitchhiker> hitchhikerList)
         {
             var returnedList = new List<LocationDestination>();

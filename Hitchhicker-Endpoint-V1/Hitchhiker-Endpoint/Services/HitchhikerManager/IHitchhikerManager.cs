@@ -3,7 +3,7 @@
 namespace Hitchhicker_Endpoint.Services.HitchhikerManager
 {
     /// <summary>
-    ///  Contains the logic to do anything related to hitchhikers.
+    ///  Contains logic to deal with hitchhikers.
     /// </summary>
     public interface IHitchhikerManager
     {

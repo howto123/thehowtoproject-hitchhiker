@@ -1,7 +1,12 @@
-﻿using Hitchhicker_Endpoint.System;
+﻿
+using Hitchhicker_Endpoint.System;
+
 
 namespace Hitchhicker_Endpoint.StartUp
 {
+    /// <summary>
+    /// faciliates startup as multithread app
+    /// </summary>
     public class CustomLauncher
     {
         private readonly TimerEventManager _timerEventManager;
@@ -19,12 +24,10 @@ namespace Hitchhicker_Endpoint.StartUp
             threadWeb.Start();
             threadTimer.Start();
         }
-
         private void LaunchTimer()
         {
             _timerEventManager.LaunchTimerEvents();
         }
-
         private void LaunchWebApp()
         {
             _webApp.Run();

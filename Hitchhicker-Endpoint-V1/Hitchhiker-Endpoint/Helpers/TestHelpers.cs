@@ -8,7 +8,7 @@ namespace Hitchhiker_Endpoint.Helpers
         {
             if (a.GetLocation().Equals(b.GetLocation()) &&
                 a.GetDestination().Equals(b.GetDestination()) &&
-                a.SouldBeDesposed().Equals(b.SouldBeDesposed()))
+                a.ShouldBeDesposed().Equals(b.ShouldBeDesposed()))
             {
                 return true;
             }

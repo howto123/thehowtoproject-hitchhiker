@@ -3,10 +3,8 @@ using Hitchhicker_Endpoint.Services.HitchhikerManager;
 using Hitchhicker_Endpoint.StartUp;
 using Hitchhicker_Endpoint.System;
 
-// settings
 const int INTERVALL_IN_SECONDS = 7;
 
-// create builder
 var builder = WebApplication.CreateBuilder(args);
 
 // subscribe services
@@ -15,7 +13,6 @@ builder.Services.
     AddSingleton<IBuilderOfIHitchhiker, BuilderOfIHitchhiker>().
     AddSingleton<IHitchhikerManager, HitchhikerManager>();
 
-// create webapp
 var app = builder.Build();
 
 // add endpoints
@@ -25,6 +22,6 @@ app.MapControllers();
 IHitchhikerManager hitchhikerManager = app.Services.GetRequiredService<IHitchhikerManager>();
 TimerEventManager timerEventManager = new(INTERVALL_IN_SECONDS, hitchhikerManager);
 
-// launch
+// Reviewer: XML Comment is not visible for CustomLauncher. Why not?
 var launcher = new CustomLauncher(app, timerEventManager);
 launcher.Launch();

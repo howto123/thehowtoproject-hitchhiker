@@ -4,6 +4,6 @@
     {
         string GetDestination();
         string GetLocation();
-        bool SouldBeDesposed();
+        bool ShouldBeDesposed();
     }
 }

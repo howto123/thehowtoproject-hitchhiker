@@ -1,6 +1,9 @@
 ﻿namespace Hitchhicker_Endpoint.Controllers
 {
-    public class CreateArgs : object
+    /// <summary>
+    /// Incomming type. Frontend posts these fields
+    /// </summary>
+    public class PostArgs : object
     {
         public string? Location { get; set; }
         public double? MinutesTillDisposal { get; set; }

@@ -15,7 +15,7 @@ namespace Hitchhicker_Endpoint.Controllers
             _manager = manager;
         }
 
-        // Endpoints
+        // Set up endpoints
         [HttpGet]
         [Route("hitchhikers/")]
         public string Get()
@@ -35,7 +35,7 @@ namespace Hitchhicker_Endpoint.Controllers
         
         [HttpPost]
         [Route("hitchhikers/")]
-        public object Post(CreateArgs args)
+        public object Post(PostArgs args)
         {
             try
             {

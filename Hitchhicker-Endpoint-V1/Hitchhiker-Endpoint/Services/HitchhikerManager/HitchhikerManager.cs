@@ -13,7 +13,6 @@ namespace Hitchhicker_Endpoint.Services.HitchhikerManager
             _hitchhikers = new List<IHitchhiker>();
             _builder = builder;
         }
-
         public void Create(string location, double minutesTillDisposal, string? destination = null)
         {
             try
@@ -32,14 +31,13 @@ namespace Hitchhicker_Endpoint.Services.HitchhikerManager
         {
             try
             {
-                _hitchhikers = _hitchhikers.FindAll(e => !e.SouldBeDesposed());
+                _hitchhikers = _hitchhikers.FindAll(e => !e.ShouldBeDesposed());
             }
             catch (Exception e)
             {
                 Console.WriteLine($"Error in Manager.deleteAllExpired(): {e.Message}");
             }
         }
-
         public List<IHitchhiker> Read()
         {
             return _hitchhikers;
