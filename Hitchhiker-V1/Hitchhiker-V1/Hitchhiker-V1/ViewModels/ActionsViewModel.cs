@@ -69,7 +69,7 @@ namespace Hitchhiker_V1.ViewModels
                     Location = location,
                     Destination = DestinationEntry
                 };
-                _httpManager.AddHitchhiker(hitchhiker);
+                await _httpManager.AddHitchhiker(hitchhiker);
             }
             catch (Exception e)
             {

@@ -1,5 +1,8 @@
 ﻿using Hitchhiker_V1.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Services.Http;
+using Xamarin.Forms.Internals;
 
 namespace Hitchhiker_V1.Tests
 {
@@ -9,7 +12,7 @@ namespace Hitchhiker_V1.Tests
         [SetUp]
         public void SetUp()
         {
-            var uri = new Uri("https://postman-echo.com/get");
+            var uri = new Uri("localhost://5090/hitchhikers");
             _sut = new HttpManager(uri);
         }
         [Test]
@@ -22,8 +25,14 @@ namespace Hitchhiker_V1.Tests
         public async Task GetAllHitchhikers_ReturnsListOfHitchhikers()
         {
             // Arrange, act
-            var hitchhikers = await _sut.GetAllHitchhikers();
-            Console.Write($"GetAllHitchhikers returns: {hitchhikers}");
+            Hitchhiker[] hitchhikers = await _sut.GetAllHitchhikers();
+            Console.WriteLine($"Here we go: {hitchhikers.Length}");
+            /*
+            hitchhikers.ForEach(h =>
+            {
+                Console.Write($"GetAllHitchhikers returns: {h}");
+            });
+            */
 
             // Assert
             Assert.IsNotNull(hitchhikers);
@@ -31,10 +40,24 @@ namespace Hitchhiker_V1.Tests
         }
 
         [Test]
-        [Ignore("Backend not online yet")]
         public async Task AddHitchhiker_WithValidArgs_DeserializesCorrectly()
         {
-            Assert.Fail();
+            Hitchhiker toBePosted = new Hitchhiker()
+            {
+                Location = new Xamarin.Essentials.Location(),
+                Destination = "Got to work"
+            };
+            var json = JsonConvert.SerializeObject(
+                       toBePosted, Formatting.Indented,
+                       new Newtonsoft.Json.JsonConverter[]
+                       {
+                           new StringEnumConverter()
+                       });
+            //Console.WriteLine(json);
+            await _sut.AddHitchhiker(toBePosted);
+            //await _sut.GetAllHitchhikers();
+
+            
         }
     }
 }

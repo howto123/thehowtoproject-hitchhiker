@@ -25,3 +25,7 @@ TimerEventManager timerEventManager = new(INTERVALL_IN_SECONDS, hitchhikerManage
 // Reviewer: XML Comment is not visible for CustomLauncher. Why not?
 var launcher = new CustomLauncher(app, timerEventManager);
 launcher.Launch();
+
+
+// Interesting read:
+// https://andrewlock.net/exploring-dotnet-6-part-1-looking-inside-configurationmanager-in-dotnet-6/

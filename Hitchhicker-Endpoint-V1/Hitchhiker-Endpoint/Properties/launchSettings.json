@@ -1,18 +1,11 @@
 ﻿{
   "$schema": "https://json.schemastore.org/launchsettings.json",
-  "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": false,
-    "iisExpress": {
-      "applicationUrl": "http://localhost:20585",
-      "sslPort": 44330
-    }
-  },
   "profiles": {
     "Hitchhicker_Endpoint_V1": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "applicationUrl": "http://localhost:5090",
+      "applicationUrl": "http://localhost:5091",
+      "httpPort": 5091,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

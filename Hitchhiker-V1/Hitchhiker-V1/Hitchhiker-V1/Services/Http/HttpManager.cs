@@ -1,10 +1,9 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Net.Http;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Hitchhiker_V1.Models;
+using System.Text;
+using System.Text.Json;
 
 namespace Services.Http
 {
@@ -48,36 +47,66 @@ namespace Services.Http
             this.client = client ?? new HttpClient();
         }
 
-        public string AddHitchhiker(Hitchhiker hitchhiker)
+        public async Task<string> AddHitchhiker(Hitchhiker hitchhiker)
         {
-            Console.WriteLine("HttpManager: AddHitchhiker() called.");
-            return "method not implemented yet...";
+            PostArgs toBePosted = new PostArgs()
+            {
+                Location = hitchhiker.Location.Longitude.ToString(),
+                Destination = hitchhiker.Destination,
+                MinutesTillDisposal = 2
+            };
+
+        HttpContent jsonContent = new StringContent(JsonSerializer.Serialize(
+                    toBePosted
+                ),
+                Encoding.UTF8,
+                "application/json");
+
+            //Console.WriteLine(jsonContent.Headers);
+            //Console.WriteLine(jsonContent.ReadAsStringAsync().Result);
+            try
+            {
+                var response = await client.PostAsync("http://localhost:5090/hitchhikers", jsonContent);
+                Console.WriteLine($"Post request done: {response.Content.ReadAsStringAsync().Result}");
+            }
+            catch (Exception err)
+            {
+                Console.WriteLine("Post Request failed :(");
+                Console.WriteLine(err);
+                Console.WriteLine(err.Message);
+            }
+            return "nothing to say";
         }
 
         public async Task<Hitchhiker[]> GetAllHitchhikers()
         {
-            Hitchhiker[] Hitchhikers = new Hitchhiker[0];
+            Hitchhiker[] hitchhikers = new Hitchhiker[0];
 
             try
             {
-                HttpResponseMessage response = await client.GetAsync(uri);
-
-                Console.WriteLine("response:");
-                Console.WriteLine(response);
-                Console.WriteLine("StatusCode");
-                Console.WriteLine(response.IsSuccessStatusCode);
-
-                string content = await response.Content.ReadAsStringAsync();
-                Console.WriteLine(content);
-                //Hitchhikers = JsonSerializer.Deserialize<List<Hitchhiker>>(content);
+                var response = await client.GetAsync("http://localhost:5090/hitchhikers");
+                Console.WriteLine("Get Request successful");
+                
+                string someString = await response.Content.ReadAsStringAsync();
+                Console.WriteLine(someString);
+                hitchhikers = Newtonsoft.Json.JsonConvert.DeserializeObject<Hitchhiker[]>(someString);
 
             }
             catch (Exception err)
             {
+                Console.WriteLine("Get Request failed :(");
+                Console.WriteLine(err);
                 Console.WriteLine(err.Message);
             }
 
-            return Hitchhikers;
+            return hitchhikers;
         }
+    }
+
+    public class PostArgs : object
+    {
+        public string Location { get; set; }
+        public double MinutesTillDisposal { get; set; }
+        public string Destination { get; set; }
     }
 }

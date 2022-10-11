@@ -9,7 +9,7 @@ namespace Services.Http
     /// </summary>
     public interface IHttpManager
     {
-        string AddHitchhiker(Hitchhiker hitchhiker);
+        Task<string> AddHitchhiker(Hitchhiker hitchhiker);
         Task<Hitchhiker[]> GetAllHitchhikers();
     }
 }

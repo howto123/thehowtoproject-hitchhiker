@@ -7,6 +7,7 @@
         private readonly DateTime _timeOfDisposal;
         public Hitchhiker(string location, double minutesTillDisposal, string destination = "")
         {
+            Console.WriteLine($"location: {location}, minutes: {minutesTillDisposal}, destination: {destination}");
             if (!AreValidArgs(location, minutesTillDisposal, destination))
             {
                 throw new ArgumentException("Hitchhiker could not be created as the arguments were invalid.");

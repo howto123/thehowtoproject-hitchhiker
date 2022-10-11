@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\C-Sharp\Mobile\thehowtoproject-hitchhiker\Hitchhicker-Endpoint-V1\Hitchhiker-Endpoint\bin\Release\net6.0\publish\</_PublishTargetUrl>
+    <History>True|2022-10-11T23:35:35.3412554Z;True|2022-10-11T23:24:14.9022353+02:00;True|2022-10-11T23:21:50.3047992+02:00;True|2022-10-05T17:02:42.7662028+02:00;True|2022-10-05T16:56:55.4624815+02:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>

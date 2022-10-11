@@ -5,7 +5,9 @@ VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hitchhicker-Endpoint", "Hitchhicker-Endpoint.csproj", "{A9FABB05-2F87-41AF-BD26-91E514F54A51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hitchhicker-EndpointTests", "..\Hitchhicker-EndpointTests\Hitchhicker-EndpointTests.csproj", "{4A7EF7FD-5C48-41AD-821D-88903B4044B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hitchhicker-EndpointTests", "..\Hitchhicker-EndpointTests\Hitchhicker-EndpointTests.csproj", "{4A7EF7FD-5C48-41AD-821D-88903B4044B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hitchhiker-Endpoint-V1.IntegrationTests", "..\Hitchhiker-Endpoint-V1.IntegrationTests\Hitchhiker-Endpoint-V1.IntegrationTests.csproj", "{1313F439-948A-465F-92DD-9ACBBE917702}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{4A7EF7FD-5C48-41AD-821D-88903B4044B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A7EF7FD-5C48-41AD-821D-88903B4044B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A7EF7FD-5C48-41AD-821D-88903B4044B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1313F439-948A-465F-92DD-9ACBBE917702}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1313F439-948A-465F-92DD-9ACBBE917702}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1313F439-948A-465F-92DD-9ACBBE917702}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1313F439-948A-465F-92DD-9ACBBE917702}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

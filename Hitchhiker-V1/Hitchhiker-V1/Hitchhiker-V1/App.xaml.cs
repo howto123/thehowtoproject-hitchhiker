@@ -15,7 +15,7 @@ namespace Hitchhiker_V1
 
         public App()
         {
-            const string URI = "https://postman-echo.com/get";
+            const string URI = "http://localhost";
             Environment.SetEnvironmentVariable("hitchhikerUri", URI);
 
             const int INTERVAL_IN_SECONDS = 2;
