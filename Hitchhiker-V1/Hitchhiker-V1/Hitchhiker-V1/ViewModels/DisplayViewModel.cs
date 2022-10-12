@@ -4,6 +4,7 @@ using Services.LocationAccess;
 using Services.MapsAccess;
 using Services.TimerEvents;
 using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
 using Xamarin.Essentials;
@@ -11,7 +12,23 @@ using Xamarin.Forms;
 
 namespace Hitchhiker_V1.ViewModels
 {
-    public class MapsViewModel : INotifyPropertyChanged
+    public class MyClass
+    {
+        public string Prop1 { get; set; }
+        public string Prop2 { get; set; }
+
+        public MyClass(string t1, string t2)
+        {
+            Prop1 = t1; Prop2 = t2; 
+        }
+
+        public override string ToString()
+        {
+            return $"Prop 1: {Prop1}, Prop2: {Prop2}";
+        }
+    }
+
+    public class DisplayViewModel : INotifyPropertyChanged
     {
         public string Title { get; }
 
@@ -29,6 +46,8 @@ namespace Hitchhiker_V1.ViewModels
             }
         }
 
+        public ObservableCollection<MyClass> MyList { get; }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         //locationaccess
@@ -39,7 +58,7 @@ namespace Hitchhiker_V1.ViewModels
         private readonly CustomState _state;
         private readonly IIntervallEventHandler _ticker;
 
-        public MapsViewModel()
+        public DisplayViewModel()
         {
             _mapsManager = DependencyService.Get<IMapsManager>();
 
@@ -48,13 +67,18 @@ namespace Hitchhiker_V1.ViewModels
 
             _ticker = DependencyService.Get<IIntervallEventHandler>();
             _ticker.Tick += OnTimerTick;
-            _ticker.Tick += _mapsManager.OnTick;
             _ticker.LaunchTimerEvents();
 
             Console.Write(_mapsManager);
 
             Title = "Map";
             InfoText = "initial text";
+
+            MyList = new ObservableCollection<MyClass>
+            {
+                new MyClass("hey", "you"),
+                new MyClass("ach", "so ist das")
+            };
         }
 
         // private void timerEventHandler()
