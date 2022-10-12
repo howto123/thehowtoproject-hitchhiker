@@ -1,6 +1,5 @@
 ﻿using Hitchhiker_V1.Models;
 using Services.Http;
-using Services.MapsAccess;
 using Services.TimerEvents;
 using System;
 using System.Collections.ObjectModel;
@@ -93,5 +92,29 @@ namespace Hitchhiker_V1.ViewModels
         {
             return $"We have: {h.Location}, goes to {h.Destination}";
         }
+
+        /*
+        public void LaunchNativeMap(object o, EventArgs args)
+        {
+            DoLaunchNativeMap();
+        }
+
+        private async  Task DoLaunchNativeMap()
+        {
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                // https://developer.apple.com/library/ios/featuredarticles/iPhoneURLScheme_Reference/MapLinks/MapLinks.html
+                await Launcher.OpenAsync("http://maps.apple.com/?q=394+Pacific+Ave+San+Francisco+CA");
+            }
+            else if (Device.RuntimePlatform == Device.Android)
+            {
+                await Launcher.OpenAsync("geo:0,0?q=394+Pacific+Ave+San+Francisco+CA");
+            }
+            else if (Device.RuntimePlatform == Device.UWP)
+            {
+                await Launcher.OpenAsync("bingmaps:?where=394 Pacific Ave San Francisco CA");
+            }
+        }
+        */
     }
 }

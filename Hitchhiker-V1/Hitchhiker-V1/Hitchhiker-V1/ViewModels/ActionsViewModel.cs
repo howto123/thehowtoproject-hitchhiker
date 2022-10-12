@@ -9,12 +9,15 @@ using Services.LocalPreferences;
 
 namespace Hitchhiker_V1.ViewModels
 {
+    //
+    // thorow cleanup necessairy. write tests only for viewmodels. but good, solid tests. write integration tests for backend as well.
+    // look at warnings
+    //
+
     public class ActionsViewModel : INotifyPropertyChanged
     {
-        public string Title { get; private set; }
         public string DestinationEntry { get; set; }
         public string DurationEntry { get; set; }
-
         public bool SaveDestination { get; set; }
 
 
@@ -33,7 +36,6 @@ namespace Hitchhiker_V1.ViewModels
             _locationAccessor = DependencyService.Get<ILocationAccessor>();
             _preferencesHandler = DependencyService.Get<IPreferencesHandler>();
 
-            Title = "Actions";
             DestinationEntry = LoadDestinationOrEmptyString();
             DurationEntry = "";
             SaveDestination = false;

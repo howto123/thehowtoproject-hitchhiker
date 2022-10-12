@@ -3,13 +3,12 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Hitchhiker_V1.Views.ActionsPage"
-    Title="{Binding Title}"
+    Title="Actions"
     xmlns:vm="clr-namespace:Hitchhiker_V1.ViewModels"
     >
     <ContentPage.BindingContext>
         <vm:ActionsViewModel />
     </ContentPage.BindingContext>
-    
     <ContentPage.Content>
         <StackLayout
             Margin="20"
