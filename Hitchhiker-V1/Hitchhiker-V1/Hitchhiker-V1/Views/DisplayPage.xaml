@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Hitchhiker_V1.Views.DisplayPage"
+    Title="Find hitchhikers"
+    xmlns:vm="clr-namespace:Hitchhiker_V1.ViewModels"
+    xmlns:views="clr-namespace:HitchhikerV1.Views"
+>
+    <ContentPage.BindingContext>
+        <vm:DisplayViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout
+            Margin="20"
+        >
+            <Label Text="These hitchhikers would like to get a lift..."/>
+            <ListView
+                x:Name="HiHListView"
+                ItemsSource="{Binding MyList}"
+                HasUnevenRows="True"
+            >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <views:HiHCompactView/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Label Text="Info text:" />
+            <Frame>
+                <Label
+                x:Name="InfoLabel"
+                Text="{Binding InfoText}"
+                FontSize="Large"
+            />
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

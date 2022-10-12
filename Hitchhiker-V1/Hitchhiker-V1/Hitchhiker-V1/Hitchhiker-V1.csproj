@@ -15,11 +15,26 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="Mono.Android">
+      <HintPath>..\..\..\..\..\..\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\MonoAndroid\v12.0\Mono.Android.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Views\ActionsPage.xaml.cs">
       <DependentUpon>ActionsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\MapsPage.xaml.cs">
-      <DependentUpon>MapsPage.xaml</DependentUpon>
+    <Compile Update="Views\DisplayPage.xaml.cs">
+      <DependentUpon>DisplayPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\HiHCompactView.xaml.cs">
+      <DependentUpon>HiHCompactView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\HiHCompactView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

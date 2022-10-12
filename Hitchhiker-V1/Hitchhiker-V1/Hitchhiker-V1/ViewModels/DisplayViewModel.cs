@@ -1,10 +1,9 @@
 ﻿using Hitchhiker_V1.Models;
-using Services.GlobalState;
 using Services.Http;
-using Services.LocationAccess;
 using Services.MapsAccess;
 using Services.TimerEvents;
 using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -14,7 +13,23 @@ using Xamarin.Forms.Internals;
 
 namespace Hitchhiker_V1.ViewModels
 {
-    public class MapsViewModel : INotifyPropertyChanged
+    public class MyClass
+    {
+        public string Prop1 { get; set; }
+        public string Prop2 { get; set; }
+
+        public MyClass(string t1, string t2)
+        {
+            Prop1 = t1; Prop2 = t2; 
+        }
+
+        public override string ToString()
+        {
+            return $"Prop 1: {Prop1}, Prop2: {Prop2}";
+        }
+    }
+
+    public class DisplayViewModel : INotifyPropertyChanged
     {
         public string Title { get; }
 
@@ -32,19 +47,17 @@ namespace Hitchhiker_V1.ViewModels
             }
         }
 
+        public ObservableCollection<MyClass> MyList { get; }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private readonly IMapsManager _mapsManager;
-        private readonly CustomState _state;
         private readonly IIntervallEventHandler _ticker;
         private readonly IHttpManager _httpManager;
 
-        public MapsViewModel()
+        public DisplayViewModel()
         {
             _mapsManager = DependencyService.Get<IMapsManager>();
-
-            _state = DependencyService.Get<CustomState>();
-            _state.PropertyChanged += SetInfoText;
 
             _ticker = DependencyService.Get<IIntervallEventHandler>();
             _ticker.Tick += OnTimerTick;
@@ -56,23 +69,17 @@ namespace Hitchhiker_V1.ViewModels
 
             Title = "Map";
             InfoText = "initial text";
+
+            MyList = new ObservableCollection<MyClass>
+            {
+                new MyClass("hey", "you"),
+                new MyClass("ach", "so ist das")
+            };
         }
 
         // private void timerEventHandler()
         // private void makeGetRequest()
         // private void updateMap()
-
-        private void SetInfoText(object o, EventArgs args)
-        {
-            if (_state.LocationVisible)
-            {
-                InfoText = "You are visible to others";
-            }
-            else
-            {
-                InfoText = "Go to 'Actions' to become visible to others";
-            }
-        }
 
         private void OnTimerTick(object o, EventArgs args)
         {

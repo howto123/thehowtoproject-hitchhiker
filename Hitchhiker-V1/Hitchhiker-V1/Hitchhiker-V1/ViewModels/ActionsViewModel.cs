@@ -6,7 +6,6 @@ using Services.LocationAccess;
 using Xamarin.Forms;
 using System.ComponentModel;
 using Services.LocalPreferences;
-using Services.GlobalState;
 
 namespace Hitchhiker_V1.ViewModels
 {
@@ -25,7 +24,6 @@ namespace Hitchhiker_V1.ViewModels
         private readonly IHttpManager _httpManager;
         private readonly ILocationAccessor _locationAccessor;
         private readonly IPreferencesHandler _preferencesHandler;
-        private readonly CustomState _state;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -34,7 +32,6 @@ namespace Hitchhiker_V1.ViewModels
             _httpManager = DependencyService.Get<IHttpManager>();
             _locationAccessor = DependencyService.Get<ILocationAccessor>();
             _preferencesHandler = DependencyService.Get<IPreferencesHandler>();
-            _state = DependencyService.Get<CustomState>();
 
             Title = "Actions";
             DestinationEntry = LoadDestinationOrEmptyString();
@@ -53,10 +50,6 @@ namespace Hitchhiker_V1.ViewModels
             {
                 StoreDestination();
             }
-
-            Console.WriteLine($"LocationVisible: {_state.LocationVisible}");
-            _state.LocationVisible = true;
-            Console.WriteLine($"LocationVisible: {_state.LocationVisible}");
         }
 
         private async void PostHitchhiker()

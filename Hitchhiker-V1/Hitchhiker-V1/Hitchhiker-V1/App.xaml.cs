@@ -1,6 +1,4 @@
-﻿using Hitchhiker_V1.ViewModels;
-using Services.GlobalState;
-using Services.Http;
+﻿using Services.Http;
 using Services.LocalPreferences;
 using Services.LocationAccess;
 using Services.MapsAccess;
@@ -41,9 +39,6 @@ namespace Hitchhiker_V1
             var mapsManager = new MapsManager();
             DependencyService.RegisterSingleton(mapsManager);
             DependencyService.Register<IMapsManager, MapsManager>();
-
-            var state = new CustomState();
-            DependencyService.RegisterSingleton<CustomState>(state);
 
             var intervallHandler = new IntervallEventHandler();
             DependencyService.RegisterSingleton(intervallHandler);

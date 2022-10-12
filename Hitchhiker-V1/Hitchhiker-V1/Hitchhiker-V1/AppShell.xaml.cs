@@ -11,7 +11,7 @@ namespace Hitchhiker_V1
         public AppShell()
         {
             InitializeComponent();
-            Routing.RegisterRoute(nameof(MapsPage), typeof(MapsPage));
+            Routing.RegisterRoute(nameof(DisplayPage), typeof(DisplayPage));
             Routing.RegisterRoute(nameof(ActionsPage), typeof(ActionsPage));
         }
 
