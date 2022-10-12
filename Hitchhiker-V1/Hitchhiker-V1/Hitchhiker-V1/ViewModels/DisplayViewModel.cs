@@ -6,8 +6,6 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
@@ -51,23 +49,17 @@ namespace Hitchhiker_V1.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private readonly IMapsManager _mapsManager;
         private readonly IIntervallEventHandler _ticker;
         private readonly IHttpManager _httpManager;
 
         public DisplayViewModel()
         {
-            _mapsManager = DependencyService.Get<IMapsManager>();
-
             _ticker = DependencyService.Get<IIntervallEventHandler>();
             _ticker.Tick += OnTimerTick;
             _ticker.LaunchTimerEvents();
 
             _httpManager = DependencyService.Get<IHttpManager>();
 
-            Console.Write(_mapsManager);
-
-            Title = "Map";
             InfoText = "initial text";
 
             MyList = new ObservableCollection<MyClass>

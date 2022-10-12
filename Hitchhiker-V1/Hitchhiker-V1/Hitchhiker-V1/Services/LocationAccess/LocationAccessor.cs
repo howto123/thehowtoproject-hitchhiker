@@ -26,13 +26,13 @@ namespace Services.LocationAccess
                 {
                     return location;
                 }
-                return null;
+                
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return null;
             }
+            return null;
         }
     }
 }

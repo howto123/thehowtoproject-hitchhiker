@@ -1,7 +1,6 @@
 ﻿using Services.Http;
 using Services.LocalPreferences;
 using Services.LocationAccess;
-using Services.MapsAccess;
 using Services.TimerEvents;
 using System;
 using Xamarin.Forms;
@@ -10,7 +9,6 @@ namespace Hitchhiker_V1
 {
     public partial class App : Application
     {
-
         public App()
         {
             const string URI = "http://localhost";
@@ -19,11 +17,9 @@ namespace Hitchhiker_V1
             const int INTERVAL_IN_SECONDS = 2;
             Environment.SetEnvironmentVariable("timerInterval", INTERVAL_IN_SECONDS.ToString());
 
-
             InitializeComponent();
-
             
-            //Subscribing dependencies as singleton
+            //Subscribe dependencies as singleton
             var httpManager = new HttpManager(null, null);
             DependencyService.RegisterSingleton(httpManager);
             DependencyService.Register<IHttpManager, HttpManager>();
@@ -35,28 +31,12 @@ namespace Hitchhiker_V1
             var locationAccessor = DependencyService.Get<LocationAccessor>();
             DependencyService.RegisterSingleton(locationAccessor);
             DependencyService.Register<ILocationAccessor, LocationAccessor>();
-          
-            var mapsManager = new MapsManager();
-            DependencyService.RegisterSingleton(mapsManager);
-            DependencyService.Register<IMapsManager, MapsManager>();
 
             var intervallHandler = new IntervallEventHandler();
             DependencyService.RegisterSingleton(intervallHandler);
             DependencyService.Register<IIntervallEventHandler, IntervallEventHandler>();
 
             MainPage = new AppShell();
-        }
-
-        protected override void OnStart()
-        {
-        }
-
-        protected override void OnSleep()
-        {
-        }
-
-        protected override void OnResume()
-        {
         }
     }
 }

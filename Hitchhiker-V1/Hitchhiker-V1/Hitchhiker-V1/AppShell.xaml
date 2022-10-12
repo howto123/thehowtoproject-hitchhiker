@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Shell xmlns="http://xamarin.com/schemas/2014/forms" 
-       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-       xmlns:local="clr-namespace:Hitchhiker_V1.Views"
-       Title="Hitchhiker_V1"
-       x:Class="Hitchhiker_V1.AppShell">
-
+<Shell
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Hitchhiker_V1.Views"
+    Title="Hitchhiker_V1"
+    x:Class="Hitchhiker_V1.AppShell"
+    >
     <Shell.Resources>
         <ResourceDictionary>
             <Style x:Key="BaseStyle" TargetType="Element">
@@ -21,10 +22,8 @@
             <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
         </ResourceDictionary>
     </Shell.Resources>
-
     <TabBar>
         <ShellContent Title="Display" Icon="icon_about.png" Route="DisplayPage" ContentTemplate="{DataTemplate local:DisplayPage}" />
         <ShellContent Title="Actions" Icon="icon_feed.png" Route="ActionsPage" ContentTemplate="{DataTemplate local:ActionsPage}" />
     </TabBar>
-    
 </Shell>

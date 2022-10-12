@@ -15,6 +15,7 @@ namespace Services.TimerEvents
                 var interval = int.Parse(Environment.GetEnvironmentVariable("timerInterval"));
                 _timer = new Timer
                 {
+                    // Interval takes milliseconds
                     Interval = interval * 1000,
                     AutoReset = true,
                 };
@@ -27,13 +28,14 @@ namespace Services.TimerEvents
 
         public void LaunchTimerEvents()
         {
-
+            // subscribe method to be called when the timer event gets fired
             _timer.Elapsed += OnElapsed;
             _timer.Enabled = true;
         }
 
         private void OnElapsed(object o, ElapsedEventArgs args)
         {
+            // fire the public event
             Tick?.Invoke(0, args);
         }
     }

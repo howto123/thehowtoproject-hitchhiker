@@ -1,7 +1,4 @@
-﻿using Hitchhiker_V1.ViewModels;
-using Hitchhiker_V1.Views;
-using System;
-using System.Collections.Generic;
+﻿using Hitchhiker_V1.Views;
 using Xamarin.Forms;
 
 namespace Hitchhiker_V1
@@ -14,6 +11,5 @@ namespace Hitchhiker_V1
             Routing.RegisterRoute(nameof(DisplayPage), typeof(DisplayPage));
             Routing.RegisterRoute(nameof(ActionsPage), typeof(ActionsPage));
         }
-
     }
 }

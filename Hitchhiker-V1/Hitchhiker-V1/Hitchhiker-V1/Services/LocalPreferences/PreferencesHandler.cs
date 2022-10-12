@@ -1,16 +1,14 @@
-﻿using System;
-using Xamarin.Essentials;
+﻿using Xamarin.Essentials;
 
 namespace Services.LocalPreferences
 {
     public class PreferencesHandler : IPreferencesHandler
     {
-
-        // public methods
         public void SetPreference(string key, string value)
         {
             Preferences.Set(key, value);
         }
+
         public string GetPreference(string key)
         {
             if (!Preferences.ContainsKey(key))

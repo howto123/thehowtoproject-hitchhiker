@@ -7,44 +7,50 @@ using System.Text.Json;
 
 namespace Services.Http
 {
-    // singleton
     public class HttpManager : IHttpManager
     {
-        // private attribute
-        private HttpClient client;
-        private readonly Uri uri;
+        //
+        // use _uri property instead of hardcoded link. set it in startup file
+        //
+        // change signature of POST? -> REVIEWER
+        //
+        // put PostArgs class in its own file
+        //
+
+        private HttpClient _client;
+        private readonly Uri _uri;
         public HttpManager()
         {
             try
             {
-                this.uri = new Uri(Environment.GetEnvironmentVariable("hitchhikerUri"));
+                this._uri = new Uri(Environment.GetEnvironmentVariable("hitchhikerUri"));
             }
             catch
             {
                 throw new Exception("Defauilt constructor; hitchhikerUri not defined in env");
             }
 
-            this.client = new HttpClient();
+            this._client = new HttpClient();
         }
-        public HttpManager(Uri uri=null, HttpClient client=null)
+        public HttpManager(Uri uri=null, HttpClient _client=null)
         {
             if (uri != null)
             {
-                this.uri = uri;
+                this._uri = uri;
             }
             else
             {
                 try
                 {
-                    this.uri = new Uri(Environment.GetEnvironmentVariable("hitchhikerUri"));
+                    this._uri = new Uri(Environment.GetEnvironmentVariable("hitchhikerUri"));
                 }
                 catch
                 {
-                    throw new Exception("Neigther environment nor constructor arg specify uri");
+                    throw new Exception("Neigther environment nor constructor arg specify _uri");
                 }
             }
 
-            this.client = client ?? new HttpClient();
+            this._client = _client ?? new HttpClient();
         }
 
         public async Task<string> AddHitchhiker(Hitchhiker hitchhiker)
@@ -56,26 +62,22 @@ namespace Services.Http
                 MinutesTillDisposal = 2
             };
 
-        HttpContent jsonContent = new StringContent(JsonSerializer.Serialize(
-                    toBePosted
-                ),
+            HttpContent jsonContent = new StringContent(
+                JsonSerializer.Serialize(toBePosted),
                 Encoding.UTF8,
-                "application/json");
+                "application/json"
+                );
 
-            //Console.WriteLine(jsonContent.Headers);
-            //Console.WriteLine(jsonContent.ReadAsStringAsync().Result);
             try
             {
-                var response = await client.PostAsync("http://localhost:5090/hitchhikers", jsonContent);
-                Console.WriteLine($"Post request done: {response.Content.ReadAsStringAsync().Result}");
+                var response = await _client.PostAsync("http://localhost:5090/hitchhikers", jsonContent);
             }
             catch (Exception err)
             {
-                Console.WriteLine("Post Request failed :(");
-                Console.WriteLine(err);
-                Console.WriteLine(err.Message);
+                Console.WriteLine($"Post request failed: {err.Message}");
             }
-            return "nothing to say";
+
+            return "AddHitchhiker completed";
         }
 
         public async Task<Hitchhiker[]> GetAllHitchhikers()
@@ -84,19 +86,14 @@ namespace Services.Http
 
             try
             {
-                var response = await client.GetAsync("http://localhost:5090/hitchhikers");
-                Console.WriteLine("Get Request successful");
-                
-                string someString = await response.Content.ReadAsStringAsync();
-                Console.WriteLine(someString);
-                hitchhikers = Newtonsoft.Json.JsonConvert.DeserializeObject<Hitchhiker[]>(someString);
+                var response = await _client.GetAsync("http://localhost:5090/hitchhikers");
+                string json = await response.Content.ReadAsStringAsync();
+                hitchhikers = Newtonsoft.Json.JsonConvert.DeserializeObject<Hitchhiker[]>(json);
 
             }
             catch (Exception err)
             {
-                Console.WriteLine("Get Request failed :(");
-                Console.WriteLine(err);
-                Console.WriteLine(err.Message);
+                Console.WriteLine($"Get request failed: {err.Message}");
             }
 
             return hitchhikers;
